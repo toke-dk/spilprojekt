@@ -4,10 +4,13 @@ int clockPin = 9;
 
 const byte rows[8] = {0b11111110,0b11111101,0b11111011,0b11110111,0b11101111,0b11011111,0b10111111,0b01111111};
 
-byte frame[8] = {0b00000001,0b00000000,0b00000000,0b00000000,0b00000000,0b00000000,0b00000000,0b00000000};
+byte frame[8] = { 0b00000001,
+                  0b00000011,0b00000111,0b00001111,0b00011111,0b00111111,0b01111111,0b11111111};
 
 
 void setup() {
+  Serial.print("startup");
+  Serial.begin(9600);
   pinMode(latchPin, OUTPUT);
   pinMode(dataPin, OUTPUT);
   pinMode(clockPin, OUTPUT);
@@ -16,6 +19,7 @@ void setup() {
 void loop() {    
   // starter frame
   loadFrame();
+  //delay(2);
 }
 
 void loadFrame() {
@@ -25,11 +29,13 @@ void loadFrame() {
     
     // gå igennem rækkerne
     shiftOut(dataPin, clockPin, LSBFIRST, rows[i]);
+    //Serial.println("done");
 
     // tilføj din nuværende række
     shiftOut(dataPin, clockPin, LSBFIRST, frame[i]);
     
     
     digitalWrite(latchPin, HIGH);
+  delay(500);
   }
 }
