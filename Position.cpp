@@ -1,13 +1,14 @@
-#ifndef Position_h
-#define Position_h
-#include "Arduino.h"
+#include "Position.h"
 
-class Position {
-  public:
-    Position(int x, int y);
-  private:
-    int _x;
-    int _y;
-};
+Position::Position(int x, int y) {
+  _x=x;
+  _y=y;
+}
 
-#endif
+int Position::getX() {
+  return _x;
+}
+
+int Position::getY() {
+  return _y;
+}

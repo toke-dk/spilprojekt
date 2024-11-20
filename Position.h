@@ -1,4 +1,17 @@
-#include "Position.h"
+#ifndef Button_h
+#define Button_h
+
 #include <Arduino.h>
-Position::Position(int x, int y) {
-}
+
+class Position {
+  public:
+    Position(int x, int y);
+
+    int getX();
+    int getY();
+    
+  private:
+    int _x;
+    int _y;
+};
+#endif
