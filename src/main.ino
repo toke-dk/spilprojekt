@@ -2,9 +2,9 @@
 #include "GameObject.h"
 #include "Frame.h"
 
-int latchPin = 7;
-int dataPin = 8;
-int clockPin = 9;
+#define latchPin 10
+#define dataPin 11
+#define clockPin 13
 
 const int rowCount = 8;
 const int collumnCount = 8;
@@ -18,7 +18,8 @@ GameObject ball(ballPosition);
 
 void setup()
 {
-    Serial.begin(9600);
+    Serial.begin(115200);
+    Serial.print("Start");
     pinMode(latchPin, OUTPUT);
     pinMode(dataPin, OUTPUT);
     pinMode(clockPin, OUTPUT);
@@ -37,12 +38,12 @@ void loop()
 void loadFrame()
 {
 
-    for (int i = 0; i < collumnCount; i++)
+    for (byte i = 0; i < collumnCount; i++)
     {
         digitalWrite(latchPin, LOW);
 
         // gå igennem rækkerne
-        shiftOut(dataPin, clockPin, LSBFIRST, rows[i]);
+        shiftOut(dataPin, clockPin, MSBFIRST, 8 - i);
 
         // tilføj din nuværende kolonne
         shiftOut(dataPin, clockPin, LSBFIRST, frame.getFrame()[i]);

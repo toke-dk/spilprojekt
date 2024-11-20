@@ -1,23 +1,30 @@
 {
-    "version": 1,
-    "author": "Toke Friis",
-    "editor": "wokwi",
-    "parts": [
-      { "type": "wokwi-arduino-uno", "id": "uno", "top": 0, "left": 0, "attrs": {} },
-      {
-        "type": "wokwi-max7219-matrix",
-        "id": "matrix1",
-        "top": -105,
-        "left": -168.99,
-        "attrs": { "chain": "1" }
-      }
-    ],
-    "connections": [
-      [ "uno:5V", "matrix1:V+", "red", [ "v0" ] ],
-      [ "matrix1:CS", "uno:10", "green", [ "h211.2", "v67.2" ] ],
-      [ "matrix1:GND", "uno:GND.1", "black", [ "h0" ] ],
-      [ "matrix1:DIN", "uno:11", "green", [ "h0" ] ],
-      [ "matrix1:CLK", "uno:13", "green", [ "h0" ] ]
-    ],
-    "dependencies": {}
-  }
+  "version": 1,
+  "author": "sutaburosu",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-arduino-uno",
+      "id": "uno",
+      "top": -177.58,
+      "left": 252.33,
+      "rotate": 90,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-max7219-matrix",
+      "id": "matrix1",
+      "top": -124.2,
+      "left": -78.96,
+      "attrs": { "chain": "1", "layout": "fc16" }
+    }
+  ],
+  "connections": [
+    [ "uno:5V", "matrix1:V+", "red", [ "h-33.66", "v-77.39" ] ],
+    [ "uno:GND.2", "matrix1:GND", "black", [ "h-42.41", "v-79.48" ] ],
+    [ "uno:11", "matrix1:DIN", "blue", [ "h20.97", "v249.88", "h-211.2", "v-211.2" ] ],
+    [ "uno:10", "matrix1:CS", "green", [ "h30.57", "v249.98", "h-230.4", "v-220.8" ] ],
+    [ "uno:13", "matrix1:CLK", "orange", [ "h40.17", "v288.08", "h-249.6", "v-220.8" ] ]
+  ],
+  "dependencies": {}
+}
