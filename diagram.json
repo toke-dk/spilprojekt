@@ -1,0 +1,23 @@
+{
+    "version": 1,
+    "author": "Toke Friis",
+    "editor": "wokwi",
+    "parts": [
+      { "type": "wokwi-arduino-uno", "id": "uno", "top": 0, "left": 0, "attrs": {} },
+      {
+        "type": "wokwi-max7219-matrix",
+        "id": "matrix1",
+        "top": -105,
+        "left": -168.99,
+        "attrs": { "chain": "1" }
+      }
+    ],
+    "connections": [
+      [ "uno:5V", "matrix1:V+", "red", [ "v0" ] ],
+      [ "matrix1:CS", "uno:10", "green", [ "h211.2", "v67.2" ] ],
+      [ "matrix1:GND", "uno:GND.1", "black", [ "h0" ] ],
+      [ "matrix1:DIN", "uno:11", "green", [ "h0" ] ],
+      [ "matrix1:CLK", "uno:13", "green", [ "h0" ] ]
+    ],
+    "dependencies": {}
+  }
