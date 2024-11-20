@@ -24,7 +24,7 @@ void loop() {
 
 void loadFrame() {
   
-  for (int i = 0; i<8, i++;) {
+  for (int i = 0; i<8; i++) {
     digitalWrite(latchPin, LOW);
     
     // gå igennem rækkerne
