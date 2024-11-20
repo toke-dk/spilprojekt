@@ -36,6 +36,6 @@ void loadFrame() {
     
     
     digitalWrite(latchPin, HIGH);
-  delay(500);
+    delay(500);
   }
 }
