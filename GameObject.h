@@ -7,10 +7,12 @@
 class GameObject {
   public:
     GameObject(Position pos);
-    int getPosX();
-
     Position pos();
-    void moveUp();
+
+    void up();
+    void down();
+    void left();
+    void right();
     
   private:
     Position _pos;

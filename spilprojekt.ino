@@ -21,8 +21,8 @@ void setup() {
 }
 
 void loop() {
-  ball.moveUp();
-  Serial.println(ball.pos().getY());
+  ball.right();
+  Serial.println(ball.pos().getX());
   // starter frame
   loadFrame();
   //delay(2);

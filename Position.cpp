@@ -16,3 +16,15 @@ int Position::getY() {
 void Position::up() {
   _y++;
 }
+
+void Position::down() {
+  _y--;
+}
+
+void Position::left() {
+  _x--;
+}
+
+void Position::right() {
+  _x++;
+}
