@@ -1,4 +1,5 @@
 #include "Position.h"
+#include "GameObject.h"
 
 int latchPin = 7;
 int dataPin = 8;
@@ -9,10 +10,11 @@ const byte rows[8] = {0b11111110,0b11111101,0b11111011,0b11110111,0b11101111,0b1
 byte frame[8] = { 0b00000001,
                   0b00000011,0b00000111,0b00001111,0b00011111,0b00111111,0b01111111,0b11111111};
 
-Position myPosition(2,2);
+Position ballPosition(2,2);
+GameObject ball(ballPosition);
 
 void setup() {
-  Serial.print(myPosition.getX());
+  Serial.print(ball.getPosX());
   Serial.begin(9600);
   pinMode(latchPin, OUTPUT);
   pinMode(dataPin, OUTPUT);
