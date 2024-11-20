@@ -12,3 +12,7 @@ int Position::getX() {
 int Position::getY() {
   return _y;
 }
+
+void Position::up() {
+  _y++;
+}

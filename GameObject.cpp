@@ -4,6 +4,10 @@
 GameObject::GameObject(Position pos) : _pos(pos) {
 }
 
-int GameObject::getPosX() {
-  return _pos.getX();
+Position GameObject::pos() {
+  return _pos;
+}
+
+void GameObject::moveUp() {
+  _pos.up();
 }

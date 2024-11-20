@@ -9,6 +9,7 @@ class Position {
 
     int getX();
     int getY();
+    void up();
     
   private:
     int _x;

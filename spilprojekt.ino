@@ -14,7 +14,6 @@ Position ballPosition(2,2);
 GameObject ball(ballPosition);
 
 void setup() {
-  Serial.print(ball.getPosX());
   Serial.begin(9600);
   pinMode(latchPin, OUTPUT);
   pinMode(dataPin, OUTPUT);
@@ -22,6 +21,8 @@ void setup() {
 }
 
 void loop() {
+  ball.moveUp();
+  Serial.println(ball.pos().getY());
   // starter frame
   loadFrame();
   //delay(2);
@@ -40,7 +41,7 @@ void loadFrame() {
     shiftOut(dataPin, clockPin, LSBFIRST, frame[i]);
     
     
-    digitalWrite(latchPin, HIGH);
+    digitalWrite(latchPin, HIGH);    
     delay(500);
   }
 }

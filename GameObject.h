@@ -8,6 +8,9 @@ class GameObject {
   public:
     GameObject(Position pos);
     int getPosX();
+
+    Position pos();
+    void moveUp();
     
   private:
     Position _pos;
