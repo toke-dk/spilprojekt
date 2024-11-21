@@ -39,11 +39,7 @@ vector<uint8_t> Frame::displayObjectsToArray()
 void Frame::_bounceIfEdge(GameObject *object)
 {
   // Checks if there is collision with borders
-  if (object->moveXCoord() > _rows - 1)
-  {
-    object->xVel *= -1;
-  }
-  if (object->moveXCoord() < 0)
+  if (object->moveXCoord() > _rows - 1 || object->moveXCoord() < 0)
   {
     object->xVel *= -1;
   }
