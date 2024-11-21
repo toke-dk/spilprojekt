@@ -28,7 +28,7 @@ vector<uint8_t> Frame::displayObjectsToArray()
 
     // after checking for bounce it should move the object
     _bounceIfEdge(_gameObjects[i]);
-    _gameObjects[i]->move();
+    _gameObjects[i]->moveX();
 
     set(_gameObjects[i]->yCord, _gameObjects[i]->xCord, true);
   }

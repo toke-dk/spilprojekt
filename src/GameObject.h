@@ -19,7 +19,8 @@ public:
   void left();
   void right();
 
-  void move();
+  void moveX();
+  float moveXCoord();
 
 private:
   float _previousTime = 0; // Store the last frame time
