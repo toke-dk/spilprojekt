@@ -1,31 +1,31 @@
-#include "Position.h"
 #include "GameObject.h"
 
-GameObject::GameObject(Position pos) : _pos(pos)
+GameObject::GameObject(int xCord, int yCord)
 {
+  _xCord = xCord;
+  _yCord = yCord;
 }
 
-Position GameObject::pos()
-{
-  return _pos;
-}
+int GameObject::getXCord() { return _xCord; };
+
+int GameObject::getYCord() { return _yCord; };
 
 void GameObject::up()
 {
-  _pos.up();
+  _yCord++;
 }
 
 void GameObject::down()
 {
-  _pos.down();
+  _yCord--;
 }
 
 void GameObject::left()
 {
-  _pos.left();
+  _xCord--;
 }
 
 void GameObject::right()
 {
-  _pos.right();
+  _xCord++;
 }

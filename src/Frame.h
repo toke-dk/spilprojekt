@@ -12,6 +12,7 @@ public:
   Frame();
 
   byte *getFrame();
+  // TODO: make a vector instead of a list
   list<GameObject> getObjects();
   void addObject(GameObject object);
 

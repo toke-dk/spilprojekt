@@ -1,4 +1,3 @@
-#include "Position.h"
 #include "GameObject.h"
 #include "Frame.h"
 #include <list>
@@ -14,14 +13,14 @@ const int collumnCount = 8;
 
 const byte rows[rowCount] = {0b11111110, 0b11111101, 0b11111011, 0b11110111, 0b11101111, 0b11011111, 0b10111111, 0b01111111};
 
-Position ballPosition(1, 2);
-GameObject ball(ballPosition);
+GameObject ball(0, 0);
 Frame frame;
 
 void setup()
 {
     frame.addObject(ball);
     Serial.begin(115200);
+    Serial.print(ball.getXCord());
     Serial.print("Start");
     pinMode(latchPin, OUTPUT);
     pinMode(dataPin, OUTPUT);
@@ -41,7 +40,7 @@ void loop()
 void loadFrame()
 {
     GameObject object = frame.getObjects().front();
-    frame.getFrame()[object.pos().getY()] |= (1 << object.pos().getX());
+    frame.getFrame()[object.getYCord()] |= (1 << object.getXCord());
 
     for (byte i = 0; i < collumnCount; i++)
     {

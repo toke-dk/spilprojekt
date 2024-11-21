@@ -2,13 +2,14 @@
 #define GameObject_h
 
 #include <Arduino.h>
-#include "Position.h"
 
 class GameObject
 {
 public:
-  GameObject(Position pos);
-  Position pos();
+  GameObject(int xCord, int yCord);
+
+  int getXCord();
+  int getYCord();
 
   void up();
   void down();
@@ -16,6 +17,7 @@ public:
   void right();
 
 private:
-  Position _pos;
+  int _xCord;
+  int _yCord;
 };
 #endif
