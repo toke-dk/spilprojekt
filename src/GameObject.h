@@ -8,6 +8,9 @@ class GameObject
 public:
   GameObject(int xCord, int yCord);
 
+  int xVel;
+  int yVel;
+
   int getXCord();
   int getYCord();
 
@@ -16,8 +19,11 @@ public:
   void left();
   void right();
 
+  void move();
+
 private:
   int _xCord;
   int _yCord;
+  
 };
 #endif

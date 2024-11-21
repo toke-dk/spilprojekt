@@ -29,3 +29,9 @@ void GameObject::right()
 {
   _xCord++;
 }
+
+void GameObject::move()
+{
+  _xCord += xVel;
+  Serial.println(_xCord);
+}

@@ -13,6 +13,7 @@ const int collumnCount = 8;
 
 const byte rows[rowCount] = {0b11111110, 0b11111101, 0b11111011, 0b11110111, 0b11101111, 0b11011111, 0b10111111, 0b01111111};
 
+// TODO: the ball should be able to have decimal coordinates
 GameObject ball(0, 0);
 Frame frame;
 
@@ -25,6 +26,8 @@ void setup()
     pinMode(latchPin, OUTPUT);
     pinMode(dataPin, OUTPUT);
     pinMode(clockPin, OUTPUT);
+
+    ball.xVel = 1;
 }
 
 void loop()
@@ -40,7 +43,7 @@ void loop()
 void loadFrame()
 {
     GameObject object = frame.getObjects().front();
-    frame.getFrame()[object.getYCord()] |= (1 << object.getXCord());
+    frame.getFrame()[object.getYCord()] |= (1 << (object.getXCord()));
 
     for (byte i = 0; i < collumnCount; i++)
     {
@@ -55,4 +58,8 @@ void loadFrame()
         digitalWrite(latchPin, HIGH);
         // delay(500);
     }
+
+    ball.move();
+    delay(1000);
+    // Serial.print(object.getXCord());
 }
