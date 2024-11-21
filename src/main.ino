@@ -60,7 +60,7 @@ void loadFrame()
         // delay(500);
     }
 
-    // ball.move();
+    ball.move();
     delay(1000);
     // Serial.print(object.getXCord());
 }

@@ -26,6 +26,7 @@ public:
   void printGrid();
 
 private:
+  size_t _rows, _columns;
   vector<vector<bool>> _grid;
   vector<GameObject *> _gameObjects;
 };

@@ -2,7 +2,7 @@
 #include <list>
 using namespace std;
 
-Frame::Frame(size_t rows, size_t columns) : _grid(rows, vector<bool>(columns, false))
+Frame::Frame(size_t rows, size_t columns) : _rows(rows), _columns(columns), _grid(rows, vector<bool>(columns, false))
 {
 }
 
@@ -19,10 +19,14 @@ void Frame::addObject(GameObject &object)
 vector<uint8_t> Frame::displayObjectsToArray()
 {
 
+  // reset the old grid to draw a new
+  _grid = vector<vector<bool>>(_rows, vector<bool>(_columns, false));
+
   for (size_t i = 0; i < _gameObjects.size(); i++)
   {
     set(_gameObjects[i]->getYCord(), _gameObjects[i]->getXCord(), true);
   }
+
   return toCompactArray();
 }
 
