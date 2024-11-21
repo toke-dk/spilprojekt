@@ -29,5 +29,7 @@ private:
   size_t _rows, _columns;
   vector<vector<bool>> _grid;
   vector<GameObject *> _gameObjects;
+
+  void _bounceIfEdge(GameObject *object);
 };
 #endif

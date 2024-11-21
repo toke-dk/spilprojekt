@@ -11,6 +11,7 @@ public:
   float xVel;
   float yVel;
 
+  // make these corrdinates public
   float getXCord();
   float getYCord();
 

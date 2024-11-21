@@ -27,12 +27,18 @@ vector<uint8_t> Frame::displayObjectsToArray()
   {
 
     // after checking for bounce it should move the object
+    _bounceIfEdge(_gameObjects[i]);
     _gameObjects[i]->move();
 
     set(_gameObjects[i]->getYCord(), _gameObjects[i]->getXCord(), true);
   }
 
   return toCompactArray();
+}
+
+void Frame::_bounceIfEdge(GameObject *object)
+{
+  // TODO: Her skal den sørge for at bolde ikke rammer ind i vægge og objekter
 }
 
 // Set a specific cell
