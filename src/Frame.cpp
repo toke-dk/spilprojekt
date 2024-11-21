@@ -25,6 +25,10 @@ vector<uint8_t> Frame::displayObjectsToArray()
 
   for (size_t i = 0; i < _gameObjects.size(); i++)
   {
+
+    // after checking for bounce it should move the object
+    _gameObjects[i]->move();
+
     set(_gameObjects[i]->getYCord(), _gameObjects[i]->getXCord(), true);
   }
 

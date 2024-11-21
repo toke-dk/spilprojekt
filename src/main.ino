@@ -47,9 +47,6 @@ void loop()
 
 void loadFrame()
 {
-    ball.move();
-    ball2.move();
-
     vector<uint8_t> bitDisplay = frame.displayObjectsToArray();
 
     for (byte i = 0; i < collumnCount; i++)
