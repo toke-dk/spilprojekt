@@ -6,22 +6,22 @@ Frame::Frame(size_t rows, size_t columns) : _grid(rows, vector<bool>(columns, fa
 {
 }
 
-vector<GameObject> Frame::getObjects()
+vector<GameObject *> Frame::getObjects()
 {
   return _gameObjects;
 }
 
-void Frame::addObject(GameObject object)
+void Frame::addObject(GameObject &object)
 {
-  _gameObjects.push_back(object);
+  _gameObjects.push_back(&object);
 }
 
-vector<uint8_t> Frame::displayObjectsToArray(vector<GameObject> objects)
+vector<uint8_t> Frame::displayObjectsToArray()
 {
 
-  for (size_t i = 0; i < objects.size(); i++)
+  for (size_t i = 0; i < _gameObjects.size(); i++)
   {
-    set(objects[i].getYCord(), objects[i].getXCord(), true);
+    set(_gameObjects[i]->getYCord(), _gameObjects[i]->getXCord(), true);
   }
   return toCompactArray();
 }

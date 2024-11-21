@@ -25,6 +25,7 @@ void setup()
     pinMode(latchPin, OUTPUT);
     pinMode(dataPin, OUTPUT);
     pinMode(clockPin, OUTPUT);
+    frame.addObject(ball);
 
     ball.xVel = 1;
     ball.right();
@@ -43,7 +44,7 @@ void loop()
 
 void loadFrame()
 {
-    vector<uint8_t> bitDisplay = frame.displayObjectsToArray({ball});
+    vector<uint8_t> bitDisplay = frame.displayObjectsToArray();
 
     for (byte i = 0; i < collumnCount; i++)
     {
