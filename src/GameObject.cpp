@@ -1,4 +1,7 @@
 #include "GameObject.h"
+float previousTime = 0; // Store the last frame time
+float currentTime = 0;  // Store the current frame time
+float deltaTime = 0;    // Store the time difference between frames
 
 GameObject::GameObject(float xCord, float yCord)
 {
@@ -32,5 +35,10 @@ void GameObject::right()
 
 void GameObject::move()
 {
-  _xCord += xVel;
+  currentTime = millis() / 1000.0;        // Get the current time
+  deltaTime = currentTime - previousTime; // Calculate time difference
+
+  _xCord += (xVel * deltaTime);
+
+  previousTime = currentTime;
 }

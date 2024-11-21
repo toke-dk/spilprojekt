@@ -34,8 +34,6 @@ vector<uint8_t> Frame::displayObjectsToArray()
 // Set a specific cell
 void Frame::set(float row, float col, bool value)
 {
-  Serial.println(col);
-  Serial.println(round(col));
   _grid[round(row)][round(col)] = value;
 }
 

@@ -27,7 +27,7 @@ void setup()
     pinMode(clockPin, OUTPUT);
     frame.addObject(ball);
 
-    ball.xVel = 0.25;
+    ball.xVel = 1;
     ball.right();
     Serial.println(ball.getXCord());
 }
@@ -60,6 +60,6 @@ void loadFrame()
         // delay(500);
     }
     ball.move();
-    delay(2000);
+    delay(1400);
     // Serial.print(object.getXCord());
 }
