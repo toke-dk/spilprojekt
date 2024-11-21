@@ -15,21 +15,24 @@ const byte rows[rowCount] = {0b11111110, 0b11111101, 0b11111011, 0b11110111, 0b1
 
 // TODO: the ball should be able to have decimal coordinates
 GameObject ball(0, 3);
+GameObject ball2(0, 0);
+
 Frame frame(8, 8);
 
 void setup()
 {
-    frame.addObject(ball);
     Serial.begin(115200);
     Serial.println("Start");
     pinMode(latchPin, OUTPUT);
     pinMode(dataPin, OUTPUT);
     pinMode(clockPin, OUTPUT);
+
     frame.addObject(ball);
 
+    frame.addObject(ball2);
+
     ball.xVel = 1;
-    ball.right();
-    Serial.println(ball.getXCord());
+    ball2.xVel = 1.3;
 }
 
 void loop()
@@ -44,6 +47,9 @@ void loop()
 
 void loadFrame()
 {
+    ball.move();
+    ball2.move();
+
     vector<uint8_t> bitDisplay = frame.displayObjectsToArray();
 
     for (byte i = 0; i < collumnCount; i++)
@@ -59,7 +65,7 @@ void loadFrame()
         digitalWrite(latchPin, HIGH);
         // delay(500);
     }
-    ball.move();
-    delay(1400);
+
+    // delay(300);
     // Serial.print(object.getXCord());
 }
