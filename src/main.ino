@@ -31,7 +31,8 @@ void setup()
 
     frame.addObject(ball2);
 
-    ball.xVel = 1;
+    ball.xVel = 4;
+    ball.yVel = 4;
     ball2.xVel = 4;
 }
 

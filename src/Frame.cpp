@@ -28,7 +28,7 @@ vector<uint8_t> Frame::displayObjectsToArray()
 
     // after checking for bounce it should move the object
     _bounceIfEdge(_gameObjects[i]);
-    _gameObjects[i]->moveX();
+    _gameObjects[i]->move();
 
     set(_gameObjects[i]->yCord, _gameObjects[i]->xCord, true);
   }
@@ -38,10 +38,15 @@ vector<uint8_t> Frame::displayObjectsToArray()
 
 void Frame::_bounceIfEdge(GameObject *object)
 {
-  // Checks if there is collision with borders
+  // Checks if there is collision with vertical borders
   if (object->moveXCoord() > _rows - 1 || object->moveXCoord() < 0)
   {
     object->xVel *= -1;
+  }
+  // Checks if there is collision with horizontal borders
+  if (object->moveYCoord() > _columns - 1 || object->moveYCoord() < 0)
+  {
+    object->yVel *= -1;
   }
 }
 
