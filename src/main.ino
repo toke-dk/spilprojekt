@@ -14,8 +14,8 @@ const int collumnCount = 8;
 const byte rows[rowCount] = {0b11111110, 0b11111101, 0b11111011, 0b11110111, 0b11101111, 0b11011111, 0b10111111, 0b01111111};
 
 // TODO: the ball should be able to have decimal coordinates
-GameObject ball(0, 2);
-GameObject ball2(0, 0);
+GameObject ball(0, 0);
+GameObject ball2(1, 2);
 
 Frame frame(8, 8);
 
@@ -31,8 +31,8 @@ void setup()
 
     frame.addObject(ball2);
 
-    ball.xVel = 11;
-    ball.yVel = 7;
+    ball.xVel = 4;
+    ball.yVel = 4;
 }
 
 void loop()
