@@ -30,7 +30,7 @@ vector<uint8_t> Frame::displayObjectsToArray()
     _bounceIfEdge(_gameObjects[i]);
     _gameObjects[i]->move();
 
-    set(_gameObjects[i]->getYCord(), _gameObjects[i]->getXCord(), true);
+    set(_gameObjects[i]->yCord, _gameObjects[i]->xCord, true);
   }
 
   return toCompactArray();
