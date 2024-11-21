@@ -2,15 +2,21 @@
 #define Frame_h
 
 #include <Arduino.h>
+#include "GameObject.h"
+#include <list>
+using namespace std;
 
+class Frame
+{
+public:
+  Frame();
 
-class Frame {
-  public:
-    Frame();
+  byte *getFrame();
+  list<GameObject> getObjects();
+  void addObject(GameObject object);
 
-    byte* getFrame();
-    
-  private:
-    byte _frame[8];
+private:
+  byte _frame[8];
+  list<GameObject> _gameObjects;
 };
 #endif

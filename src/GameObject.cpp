@@ -1,27 +1,31 @@
 #include "Position.h"
 #include "GameObject.h"
 
-GameObject::GameObject(Position pos) : _pos(pos) {
+GameObject::GameObject(Position pos) : _pos(pos)
+{
 }
 
-Position GameObject::pos() {
+Position GameObject::pos()
+{
   return _pos;
 }
 
-void GameObject::up() {
+void GameObject::up()
+{
   _pos.up();
 }
 
-
-void GameObject::down() {
+void GameObject::down()
+{
   _pos.down();
 }
 
-void GameObject::left() {
+void GameObject::left()
+{
   _pos.left();
 }
 
-
-void GameObject::right() {
+void GameObject::right()
+{
   _pos.right();
 }

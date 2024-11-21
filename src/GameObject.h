@@ -4,18 +4,18 @@
 #include <Arduino.h>
 #include "Position.h"
 
-class GameObject {
-  public:
-    GameObject(Position pos);
-    Position pos();
+class GameObject
+{
+public:
+  GameObject(Position pos);
+  Position pos();
 
-    void up();
-    void down();
-    void left();
-    void right();
-    
-  private:
-    Position _pos;
-    
+  void up();
+  void down();
+  void left();
+  void right();
+
+private:
+  Position _pos;
 };
 #endif
