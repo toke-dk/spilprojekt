@@ -26,7 +26,9 @@ void setup()
     pinMode(dataPin, OUTPUT);
     pinMode(clockPin, OUTPUT);
 
-    // ball.xVel = 1;
+    ball.xVel = 1;
+    ball.right();
+    Serial.println(ball.getXCord());
 }
 
 void loop()
@@ -41,8 +43,8 @@ void loop()
 
 void loadFrame()
 {
-    vector<uint8_t> bitDisplay = frame.displayObjectsToArray();
-    Serial.print(bitDisplay[0]);
+    vector<uint8_t> bitDisplay = frame.displayObjectsToArray({ball});
+
     for (byte i = 0; i < collumnCount; i++)
     {
         digitalWrite(latchPin, LOW);

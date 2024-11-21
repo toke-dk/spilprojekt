@@ -15,7 +15,7 @@ public:
   // TODO: make a vector instead of a list
   vector<GameObject> getObjects();
   void addObject(GameObject object);
-  vector<uint8_t> displayObjectsToArray();
+  vector<uint8_t> displayObjectsToArray(vector<GameObject> objects);
 
   void set(size_t row, size_t col, bool value);
   int get(size_t row, size_t col);

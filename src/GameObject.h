@@ -24,6 +24,5 @@ public:
 private:
   int _xCord;
   int _yCord;
-  
 };
 #endif
