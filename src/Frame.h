@@ -4,20 +4,28 @@
 #include <Arduino.h>
 #include "GameObject.h"
 #include <list>
+#include <vector>
 using namespace std;
 
 class Frame
 {
 public:
-  Frame();
+  Frame(size_t rows, size_t columns);
 
-  byte *getFrame();
   // TODO: make a vector instead of a list
-  list<GameObject> getObjects();
+  vector<GameObject> getObjects();
   void addObject(GameObject object);
+  vector<uint8_t> displayObjectsToArray();
+
+  void set(size_t row, size_t col, bool value);
+  int get(size_t row, size_t col);
+
+  vector<uint8_t> toCompactArray();
+
+  void printGrid();
 
 private:
-  byte _frame[8];
-  list<GameObject> _gameObjects;
+  vector<vector<bool>> _grid;
+  vector<GameObject> _gameObjects;
 };
 #endif

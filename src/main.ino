@@ -14,20 +14,19 @@ const int collumnCount = 8;
 const byte rows[rowCount] = {0b11111110, 0b11111101, 0b11111011, 0b11110111, 0b11101111, 0b11011111, 0b10111111, 0b01111111};
 
 // TODO: the ball should be able to have decimal coordinates
-GameObject ball(0, 0);
-Frame frame;
+GameObject ball(1, 3);
+Frame frame(8, 8);
 
 void setup()
 {
     frame.addObject(ball);
     Serial.begin(115200);
-    Serial.print(ball.getXCord());
-    Serial.print("Start");
+    Serial.println("Start");
     pinMode(latchPin, OUTPUT);
     pinMode(dataPin, OUTPUT);
     pinMode(clockPin, OUTPUT);
 
-    ball.xVel = 1;
+    // ball.xVel = 1;
 }
 
 void loop()
@@ -42,9 +41,8 @@ void loop()
 
 void loadFrame()
 {
-    GameObject object = frame.getObjects().front();
-    frame.getFrame()[object.getYCord()] |= (1 << (object.getXCord()));
-
+    vector<uint8_t> bitDisplay = frame.displayObjectsToArray();
+    Serial.print(bitDisplay[0]);
     for (byte i = 0; i < collumnCount; i++)
     {
         digitalWrite(latchPin, LOW);
@@ -53,13 +51,13 @@ void loadFrame()
         shiftOut(dataPin, clockPin, MSBFIRST, 8 - i);
 
         // tilføj din nuværende kolonne
-        shiftOut(dataPin, clockPin, LSBFIRST, frame.getFrame()[i]);
+        shiftOut(dataPin, clockPin, LSBFIRST, bitDisplay[i]);
 
         digitalWrite(latchPin, HIGH);
         // delay(500);
     }
 
-    ball.move();
+    // ball.move();
     delay(1000);
     // Serial.print(object.getXCord());
 }
