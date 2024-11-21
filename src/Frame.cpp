@@ -1,5 +1,6 @@
 #include "Frame.h"
 #include <list>
+#include <cmath>
 using namespace std;
 
 Frame::Frame(size_t rows, size_t columns) : _rows(rows), _columns(columns), _grid(rows, vector<bool>(columns, false))
@@ -31,9 +32,11 @@ vector<uint8_t> Frame::displayObjectsToArray()
 }
 
 // Set a specific cell
-void Frame::set(size_t row, size_t col, bool value)
+void Frame::set(float row, float col, bool value)
 {
-  _grid[row][col] = value;
+  Serial.println(col);
+  Serial.println(round(col));
+  _grid[round(row)][round(col)] = value;
 }
 
 // Get a specific cell

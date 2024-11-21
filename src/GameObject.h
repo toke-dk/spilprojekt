@@ -6,13 +6,13 @@
 class GameObject
 {
 public:
-  GameObject(int xCord, int yCord);
+  GameObject(float xCord, float yCord);
 
-  int xVel;
-  int yVel;
+  float xVel;
+  float yVel;
 
-  int getXCord();
-  int getYCord();
+  float getXCord();
+  float getYCord();
 
   void up();
   void down();
@@ -22,7 +22,7 @@ public:
   void move();
 
 private:
-  int _xCord;
-  int _yCord;
+  float _xCord;
+  float _yCord;
 };
 #endif

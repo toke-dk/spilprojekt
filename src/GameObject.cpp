@@ -1,14 +1,14 @@
 #include "GameObject.h"
 
-GameObject::GameObject(int xCord, int yCord)
+GameObject::GameObject(float xCord, float yCord)
 {
   _xCord = xCord;
   _yCord = yCord;
 }
 
-int GameObject::getXCord() { return _xCord; };
+float GameObject::getXCord() { return _xCord; };
 
-int GameObject::getYCord() { return _yCord; };
+float GameObject::getYCord() { return _yCord; };
 
 void GameObject::up()
 {

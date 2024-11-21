@@ -18,7 +18,7 @@ public:
 
   vector<uint8_t> displayObjectsToArray();
 
-  void set(size_t row, size_t col, bool value);
+  void set(float row, float col, bool value);
   int get(size_t row, size_t col);
 
   vector<uint8_t> toCompactArray();
