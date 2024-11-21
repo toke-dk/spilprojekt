@@ -27,7 +27,6 @@ public:
 
 private:
   float _previousTime = 0; // Store the last frame time
-  float _currentTime = 0;  // Store the current frame time
   float _deltaTime = 0;    // Store the time difference between frames
   void _moveY();
   void _moveX();

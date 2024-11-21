@@ -31,7 +31,7 @@ void GameObject::_moveX()
 
 float GameObject::moveXCoord()
 {
-  _currentTime = millis() / 1000.0;          // Get the current time
+  float _currentTime = millis() / 1000.0;    // Get the current time
   _deltaTime = _currentTime - _previousTime; // Calculate time difference
 
   return xCord + xVel * _deltaTime;
@@ -44,7 +44,7 @@ void GameObject::_moveY()
 
 float GameObject::moveYCoord()
 {
-  _currentTime = millis() / 1000.0;          // Get the current time
+  float _currentTime = millis() / 1000.0;    // Get the current time
   _deltaTime = _currentTime - _previousTime; // Calculate time difference
 
   return yCord + yVel * _deltaTime;
@@ -52,6 +52,8 @@ float GameObject::moveYCoord()
 
 void GameObject::move()
 {
+  float _currentTime = millis() / 1000.0;
+
   _moveX();
   _moveY();
   _previousTime = _currentTime;

@@ -31,9 +31,8 @@ void setup()
 
     frame.addObject(ball2);
 
-    ball.xVel = 4;
-    ball.yVel = 4;
-    ball2.xVel = 4;
+    ball.xVel = 11;
+    ball.yVel = 7;
 }
 
 void loop()
