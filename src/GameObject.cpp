@@ -44,4 +44,5 @@ void GameObject::move()
   xCord += xVel * _deltaTime;
 
   _previousTime = _currentTime;
+  // TODO the time and maybe x and y coordinates need more digits (long)
 }

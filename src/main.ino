@@ -33,6 +33,10 @@ void setup()
 
     ball.xVel = 10;
     ball.yVel = 10;
+
+    ball2.xVel = 8;
+    ball2.yVel = 20;
+    ball2.width = 3;
 }
 
 void loop()

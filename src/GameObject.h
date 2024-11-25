@@ -14,6 +14,9 @@ public:
   float xCord;
   float yCord;
 
+  float width = 1;
+  float height = 1;
+
   void up();
   void down();
   void left();
