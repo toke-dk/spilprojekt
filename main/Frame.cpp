@@ -3,7 +3,7 @@
 #include <cmath>
 using namespace std;
 
-Frame::Frame(size_t rows, size_t columns) : _rows(rows), _columns(columns), _grid(rows, vector<bool>(columns, false))
+Frame::Frame(size_t rows, size_t columns) : _rows(rows), _columns(columns), _grid()
 {
 }
 
@@ -25,7 +25,13 @@ vector<uint8_t> Frame::displayObjectsToArray()
 {
 
   // reset the old grid to draw a new
-  _grid = vector<vector<bool>>(_rows, vector<bool>(_columns, false));
+  for (size_t i = 0; i < _rows; i++)
+  {
+    for (size_t j = 0; j < _columns; j++)
+    {
+      _grid[i][j] = 0; // Set each element to 0
+    }
+  };
 
   // check if bounce for each object
   for (size_t i = 0; i < _amountOfObjects; i++)
@@ -44,8 +50,8 @@ vector<uint8_t> Frame::displayObjectsToArray()
 // Convert to a compact bit-representation
 vector<uint8_t> Frame::toCompactArray()
 {
-  size_t rows = _grid.size();
-  size_t cols = _grid[0].size();
+  size_t rows = sizeof(_grid) / sizeof(_grid[0]);       // Total size / size of one row
+  size_t cols = sizeof(_grid[0]) / sizeof(_grid[0][0]); // Size of one row / size of one element
   std::vector<uint8_t> compact(rows, 0);
 
   for (size_t i = 0; i < rows; ++i)

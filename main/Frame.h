@@ -25,7 +25,7 @@ public:
 
 private:
   size_t _rows, _columns;
-  vector<vector<bool>> _grid;
+  bool _grid[8][8];
   GameObject *_gameObjects[100];
   size_t _amountOfObjects;
 
