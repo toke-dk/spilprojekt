@@ -14,12 +14,12 @@ public:
 
   void addObject(GameObject &object);
 
-  vector<uint8_t> displayObjectsToArray();
+  uint8_t *displayObjectsToArray();
 
   void set(float row, float col, bool value);
   int get(size_t row, size_t col);
 
-  vector<uint8_t> toCompactArray();
+  uint8_t *toCompactArray();
 
   void printGrid();
 

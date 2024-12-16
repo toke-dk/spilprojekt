@@ -51,7 +51,7 @@ void loop()
 
 void loadFrame()
 {
-    vector<uint8_t> bitDisplay = frame.displayObjectsToArray();
+    uint8_t *bitDisplay = frame.displayObjectsToArray();
 
     for (byte i = 0; i < collumnCount; i++)
     {
@@ -66,7 +66,9 @@ void loadFrame()
         digitalWrite(latchPin, HIGH);
         // delay(500);
     }
+    // reset the bit to clear memory
+    delete[] bitDisplay;
 
-    // delay(300);
+    delay(10);
     // Serial.print(object.getXCord());
 }

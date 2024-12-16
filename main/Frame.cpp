@@ -21,7 +21,7 @@ void Frame::addObject(GameObject &object)
   Serial.println(_gameObjects[1]->yCord);
 }
 
-vector<uint8_t> Frame::displayObjectsToArray()
+uint8_t *Frame::displayObjectsToArray()
 {
 
   // reset the old grid to draw a new
@@ -48,11 +48,13 @@ vector<uint8_t> Frame::displayObjectsToArray()
 }
 
 // Convert to a compact bit-representation
-vector<uint8_t> Frame::toCompactArray()
+uint8_t *Frame::toCompactArray()
 {
   size_t rows = sizeof(_grid) / sizeof(_grid[0]);       // Total size / size of one row
   size_t cols = sizeof(_grid[0]) / sizeof(_grid[0][0]); // Size of one row / size of one element
-  std::vector<uint8_t> compact(rows, 0);
+
+  // Dynamically allocate an array of uint8_t
+  uint8_t *compact = new uint8_t[rows]();
 
   for (size_t i = 0; i < rows; ++i)
   {
@@ -64,7 +66,7 @@ vector<uint8_t> Frame::toCompactArray()
       }
     }
   }
-  return compact;
+  return compact; // Caller must free the memory
 }
 
 void Frame::_bounceIfEdge(GameObject *object)
