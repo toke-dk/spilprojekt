@@ -36,7 +36,6 @@ float GameObject::moveYCoord()
 
 void GameObject::move()
 {
-  Serial.println("Move");
   _currentTime = millis() / 1000.0;
 
   _deltaTime = _currentTime - _previousTime; // Calculate time difference
@@ -45,6 +44,8 @@ void GameObject::move()
   xCord += xVel * _deltaTime;
 
   _previousTime = _currentTime;
-  Serial.println(yCord);
+
+  // Serial.println("Move");
+  // Serial.println(yCord);
   // TODO the time and maybe x and y coordinates need more digits (long)
 }

@@ -35,10 +35,10 @@ uint8_t *Frame::displayObjectsToArray()
   for (size_t i = 0; i < _amountOfObjects; i++)
   {
 
-    // after checking for bounce it should move the object
-    _bounceIfEdge(_gameObjects[i]);
-
     _gameObjects[i]->move();
+
+    // correction of moving gameobjects
+    _bounceIfEdge(_gameObjects[i]);
 
     set(_gameObjects[i]->yCord, _gameObjects[i]->xCord, true);
   }
@@ -69,14 +69,31 @@ uint8_t *Frame::toCompactArray()
 
 void Frame::_bounceIfEdge(GameObject *object)
 {
-  // Checks if there is collision with vertical borders
-  if (object->moveXCoord() > _rows - 1 || object->moveXCoord() < 0)
+  // Checks if there is collision with right border
+  if (object->xCord > _columns - 1)
   {
+    float correctionAmountX = 2 * (_columns - 1) - object->xCord;
+    object->xCord = correctionAmountX;
     object->xVel *= -1;
   }
-  // Checks if there is collision with horizontal borders
-  if (object->moveYCoord() > _columns - 1 || object->moveYCoord() < 0)
+  // Check if behind left border
+  if (object->xCord < 0)
   {
+    object->xCord = -object->xCord;
+    object->xVel *= -1;
+  }
+
+  // Checks if there is collision with top borders
+  if (object->yCord > _rows - 1)
+  {
+    float correctionAmountY = 2 * (_rows - 1) - object->yCord;
+    object->yCord = correctionAmountY;
+    object->yVel *= -1;
+  }
+  // Check if below bottom border
+  if (object->yCord < 0)
+  {
+    object->yCord = -object->yCord;
     object->yVel *= -1;
   }
 }

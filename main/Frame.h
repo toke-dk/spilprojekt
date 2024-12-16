@@ -22,7 +22,7 @@ public:
 
 private:
   size_t _rows, _columns;
-  bool _grid[8][8];
+  bool _grid[16][16];
   GameObject *_gameObjects[100];
   size_t _amountOfObjects;
 
