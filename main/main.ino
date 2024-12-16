@@ -10,10 +10,17 @@ const int collumnCount = 8;
 
 const byte rows[rowCount] = {0b11111110, 0b11111101, 0b11111011, 0b11110111, 0b11101111, 0b11011111, 0b10111111, 0b01111111};
 
+byte frameTest[8] = { 0b00000001,
+                  0b00000011,0b00000111,0b00001111,0b00011111,0b00111111,0b01111111,0b11111111};
+
+
 // TODO: the ball should be able to have decimal coordinates
 GameObject ball(3, 7);
-GameObject ball2(1, 2);
+// GameObject ball2(1, 2);
+// frame.addObject(ball2);
 
+// ball2.xVel = 10;
+// ball2.yVel = 8;
 Frame frame(8, 8);
 
 void setup()
@@ -27,13 +34,8 @@ void setup()
     delay(500);
     frame.addObject(ball);
 
-    frame.addObject(ball2);
-
     ball.xVel = 5;
     ball.yVel = -5;
-
-    ball2.xVel = 10;
-    ball2.yVel = 8;
 }
 
 void loop()
@@ -55,7 +57,7 @@ void loadFrame()
         digitalWrite(latchPin, LOW);
 
         // gå igennem rækkerne
-        shiftOut(dataPin, clockPin, MSBFIRST, 8 - i);
+        shiftOut(dataPin, clockPin, MSBFIRST, rows[i]);
 
         // tilføj din nuværende kolonne
         shiftOut(dataPin, clockPin, LSBFIRST, bitDisplay[i]);
