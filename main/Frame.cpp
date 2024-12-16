@@ -1,6 +1,4 @@
 #include "Frame.h"
-#include <list>
-#include <cmath>
 using namespace std;
 
 Frame::Frame(size_t rows, size_t columns) : _rows(rows), _columns(columns), _grid()

@@ -3,9 +3,6 @@
 
 #include <Arduino.h>
 #include "GameObject.h"
-#include <list>
-#include <vector>
-using namespace std;
 
 class Frame
 {

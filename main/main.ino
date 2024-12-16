@@ -1,8 +1,5 @@
 #include "GameObject.h"
 #include "Frame.h"
-#include <list>
-#include <vector>
-using namespace std;
 
 #define latchPin 10
 #define dataPin 11
