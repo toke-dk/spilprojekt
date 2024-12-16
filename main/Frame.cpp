@@ -7,14 +7,18 @@ Frame::Frame(size_t rows, size_t columns) : _rows(rows), _columns(columns), _gri
 {
 }
 
-vector<GameObject *> Frame::getObjects()
-{
-  return _gameObjects;
-}
-
 void Frame::addObject(GameObject &object)
 {
-  _gameObjects.push_back(&object);
+  _amountOfObjects++;
+
+  // Point the last element to the new object
+  _gameObjects[_amountOfObjects - 1] = &object;
+  // Serial.println(_gameObjects[0]->xCord);
+
+  Serial.print("x:cord");
+  Serial.println(_gameObjects[1]->xCord);
+  Serial.print("y:cord");
+  Serial.println(_gameObjects[1]->yCord);
 }
 
 vector<uint8_t> Frame::displayObjectsToArray()
@@ -23,17 +27,38 @@ vector<uint8_t> Frame::displayObjectsToArray()
   // reset the old grid to draw a new
   _grid = vector<vector<bool>>(_rows, vector<bool>(_columns, false));
 
-  for (size_t i = 0; i < _gameObjects.size(); i++)
+  // check if bounce for each object
+  for (size_t i = 0; i < _amountOfObjects; i++)
   {
 
     // after checking for bounce it should move the object
     _bounceIfEdge(_gameObjects[i]);
+
     _gameObjects[i]->move();
 
     set(_gameObjects[i]->yCord, _gameObjects[i]->xCord, true);
   }
-
   return toCompactArray();
+}
+
+// Convert to a compact bit-representation
+vector<uint8_t> Frame::toCompactArray()
+{
+  size_t rows = _grid.size();
+  size_t cols = _grid[0].size();
+  std::vector<uint8_t> compact(rows, 0);
+
+  for (size_t i = 0; i < rows; ++i)
+  {
+    for (size_t j = 0; j < cols; ++j)
+    {
+      if (_grid[i][j])
+      {
+        compact[i] |= (1 << j);
+      }
+    }
+  }
+  return compact;
 }
 
 void Frame::_bounceIfEdge(GameObject *object)
@@ -60,26 +85,6 @@ void Frame::set(float row, float col, bool value)
 int Frame::get(size_t row, size_t col)
 {
   return _grid[row][col];
-}
-
-// Convert to a compact bit-representation
-vector<uint8_t> Frame::toCompactArray()
-{
-  size_t rows = _grid.size();
-  size_t cols = _grid[0].size();
-  std::vector<uint8_t> compact(rows, 0);
-
-  for (size_t i = 0; i < rows; ++i)
-  {
-    for (size_t j = 0; j < cols; ++j)
-    {
-      if (_grid[i][j])
-      {
-        compact[i] |= (1 << j);
-      }
-    }
-  }
-  return compact;
 }
 
 void Frame::printGrid()

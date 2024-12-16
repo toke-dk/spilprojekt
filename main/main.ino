@@ -27,16 +27,16 @@ void setup()
     pinMode(dataPin, OUTPUT);
     pinMode(clockPin, OUTPUT);
 
+    delay(500);
     frame.addObject(ball);
 
     frame.addObject(ball2);
 
-    ball.xVel = 10;
-    ball.yVel = 10;
+    ball.xVel = 5;
+    ball.yVel = -5;
 
-    ball2.xVel = 8;
-    ball2.yVel = 20;
-    ball2.width = 3;
+    ball2.xVel = 10;
+    ball2.yVel = 8;
 }
 
 void loop()

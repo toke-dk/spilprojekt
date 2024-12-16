@@ -12,8 +12,6 @@ class Frame
 public:
   Frame(size_t rows, size_t columns);
 
-  vector<GameObject *> getObjects();
-
   void addObject(GameObject &object);
 
   vector<uint8_t> displayObjectsToArray();
@@ -28,7 +26,8 @@ public:
 private:
   size_t _rows, _columns;
   vector<vector<bool>> _grid;
-  vector<GameObject *> _gameObjects;
+  GameObject *_gameObjects[100];
+  size_t _amountOfObjects;
 
   void _bounceIfEdge(GameObject *object);
 };
