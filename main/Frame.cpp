@@ -1,7 +1,7 @@
 #include "Frame.h"
 using namespace std;
 
-Frame::Frame(size_t rows, size_t columns) : _rows(rows), _columns(columns), _grid()
+Frame::Frame(size_t rows, size_t columns, size_t X_SEGMENTS, size_t Y_SEGMENTS) : _rows(rows), _columns(columns), _grid(), _X_SEGMENTS(X_SEGMENTS), _Y_SEGMENTS(Y_SEGMENTS)
 {
 }
 

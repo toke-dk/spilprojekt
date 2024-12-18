@@ -14,12 +14,25 @@
     {
       "type": "wokwi-max7219-matrix",
       "id": "matrix1",
-      "top": -124.2,
-      "left": -78.96,
-      "attrs": { "chain": "1", "layout": "fc16" }
+      "top": -126.7,
+      "left": -79.5,
+      "attrs": { "chain": "2", "layout": "fc16" }
+    },
+    {
+      "type": "wokwi-max7219-matrix",
+      "id": "matrix2",
+      "top": -47.8,
+      "left": -78.64,
+      "rotate": 180,
+      "attrs": { "chain": "2", "layout": "fc16" }
     }
   ],
   "connections": [
+    [ "matrix1:GND.2", "matrix2:GND", "black", [ "h-47.8", "v89.07" ] ],
+    [ "matrix1:DOUT", "matrix2:DIN", "blue", [ "h-38.2", "v69.87" ] ],
+    [ "matrix1:CS.2", "matrix2:CS", "green", [ "h-28.6", "v50.67" ] ],
+    [ "matrix1:CLK.2", "matrix2:CLK", "orange", [ "h-19", "v31.47" ] ],
+    [ "matrix2:V+", "matrix1:V+.2", "red", [ "h-56.74", "v-110.5" ] ],
     [ "uno:5V", "matrix1:V+", "red", [ "h-33.66", "v-77.39" ] ],
     [ "uno:GND.2", "matrix1:GND", "black", [ "h-42.41", "v-79.48" ] ],
     [ "uno:11", "matrix1:DIN", "blue", [ "h20.97", "v249.88", "h-211.2", "v-211.2" ] ],
