@@ -7,7 +7,7 @@
 class Frame
 {
 public:
-  Frame(size_t rows, size_t columns, size_t X_SEGMENTS, size_t Y_SEGMENTS);
+  Frame(size_t X_SEGMENTS, size_t Y_SEGMENTS);
 
   void addObject(GameObject &object);
 

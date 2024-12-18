@@ -4,8 +4,8 @@
 #define latchPin 10
 #define dataPin 11
 #define clockPin 13
-#define X_SEGMENTS 2
-#define Y_SEGMENTS 2
+#define X_SEGMENTS 1
+#define Y_SEGMENTS 1
 #define NUM_SEGMENTS (X_SEGMENTS * Y_SEGMENTS)
 
 const int rowCount = 16;
@@ -74,7 +74,7 @@ GameObject ball(1, 5);
 
 // ball2.xVel = 10;
 // ball2.yVel = 8;
-Frame frame(8, 8, X_SEGMENTS, Y_SEGMENTS);
+Frame frame(X_SEGMENTS, Y_SEGMENTS);
 
 void setup()
 {
