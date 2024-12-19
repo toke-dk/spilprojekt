@@ -6,6 +6,7 @@
 #define clockPin 13
 #define X_SEGMENTS 2
 #define Y_SEGMENTS 2
+#define PLAYER_HEIGHT 5
 #define SEGMENTS_TOTAL (X_SEGMENTS * Y_SEGMENTS)
 
 const int rowCount = 16;
@@ -51,7 +52,9 @@ int array[16][16] = {
 
 // TODO: the ball should be able to have decimal coordinates
 GameObject ball(0, 0, GameObject::BOUNCING);
-GameObject playerOne(5, 5, GameObject::STATIC);
+GameObject playerLeft(0, rowCount - PLAYER_HEIGHT, GameObject::STATIC);
+GameObject playerRight(collumnCount - 1, rowCount - PLAYER_HEIGHT, GameObject::STATIC);
+
 // GameObject ball2(1, 2);
 // frame.addObject(ball2);
 
@@ -69,13 +72,14 @@ void setup()
 
     // delay(500);
     frame.addObject(ball);
-    frame.addObject(playerOne);
+    frame.addObject(playerLeft);
+    frame.addObject(playerRight);
 
     ball.xVel = 16;
     ball.yVel = 10;
 
-    playerOne.height = 5;
-    playerOne.width = 8;
+    playerLeft.height = 5;
+    playerRight.height = 5;
 }
 
 void loop()
@@ -87,19 +91,19 @@ void loop()
         Serial.println(receivedChar); // Echo back the character
         if (receivedChar == 'w')
         {
-            playerOne.up();
-        }
-        if (receivedChar == 'a')
-        {
-            playerOne.left();
+            playerLeft.up();
         }
         else if (receivedChar == 's')
         {
-            playerOne.down();
+            playerLeft.down();
         }
-        else if (receivedChar == 'd')
+        else if (receivedChar == 'i')
         {
-            playerOne.right();
+            playerRight.up();
+        }
+        else if (receivedChar == 'k')
+        {
+            playerRight.down();
         }
     }
     // ball.right();

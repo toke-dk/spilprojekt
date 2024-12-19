@@ -84,31 +84,35 @@ void Frame::_handleBarriers(GameObject *object)
   if (object->getType() == GameObject::BOUNCING)
   {
     GameObject **staticObjects = getStaticObjects();
-    if (object->xCord + object->width > staticObjects[0]->xCord &&
-        object->xCord < staticObjects[0]->xCord + staticObjects[0]->width &&
-        object->yCord + object->height > staticObjects[0]->yCord &&
-        object->yCord < staticObjects[0]->yCord + staticObjects[0]->height)
+
+    for (size_t i = 0; i < _amountOfStaticObjects; i++)
     {
-      float closestXEdge = min(
-          staticObjects[0]->xCord + staticObjects[0]->width - object->xCord - object->width,
-          object->xCord - staticObjects[0]->xCord);
-
-      float closestYEdge = min(
-          staticObjects[0]->yCord + staticObjects[0]->height - object->yCord - object->height,
-          object->yCord - staticObjects[0]->yCord);
-
-      if (min(closestXEdge, closestYEdge) == closestXEdge)
+      if (object->xCord + object->width > staticObjects[i]->xCord &&
+          object->xCord < staticObjects[i]->xCord + staticObjects[i]->width &&
+          object->yCord + object->height > staticObjects[i]->yCord &&
+          object->yCord < staticObjects[i]->yCord + staticObjects[i]->height)
       {
-        object->xVel *= -1;
-      }
-      else
-      {
-        object->yVel *= -1;
-      }
+        float closestXEdge = min(
+            staticObjects[i]->xCord + staticObjects[i]->width - object->xCord - object->width,
+            object->xCord - staticObjects[i]->xCord);
 
-      Serial.print("Collision ");
-      Serial.println(staticObjects[0]->height);
+        float closestYEdge = min(
+            staticObjects[i]->yCord + staticObjects[i]->height - object->yCord - object->height,
+            object->yCord - staticObjects[i]->yCord);
+
+        if (min(closestXEdge, closestYEdge) == closestXEdge)
+        {
+          object->xVel *= -1;
+        }
+        else
+        {
+          object->yVel *= -1;
+        }
+
+        Serial.print("Collision ");
+      }
     }
+
     delete[] staticObjects;
 
     // Checks if there is collision with right border
