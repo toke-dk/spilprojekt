@@ -4,9 +4,9 @@
 #define latchPin 10
 #define dataPin 11
 #define clockPin 13
-#define X_SEGMENTS 1
-#define Y_SEGMENTS 1
-#define NUM_SEGMENTS (X_SEGMENTS * Y_SEGMENTS)
+#define X_SEGMENTS 2
+#define Y_SEGMENTS 2
+#define SEGMENTS_TOTAL (X_SEGMENTS * Y_SEGMENTS)
 
 const int rowCount = 16;
 const int collumnCount = 16;
@@ -30,45 +30,27 @@ const word rows[rowCount] = {
     0b0111111111111111,
 };
 
-// to farver derfor to slags 16*16
-word frameTest[rowCount * 2] = {
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b1000000000000000,
-
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
+uint8_t array[16][16] = {
+    {0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 3, 2, 2, 2, 2, 3, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 3, 2, 1, 1, 1, 1, 2, 3, 0, 0, 0, 0},
+    {0, 0, 0, 3, 2, 1, 0, 0, 0, 0, 1, 2, 3, 0, 0, 0},
+    {0, 0, 3, 2, 1, 0, 0, 0, 0, 0, 0, 1, 2, 3, 0, 0},
+    {0, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 0},
+    {3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3},
+    {0, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 0},
+    {0, 0, 3, 2, 1, 0, 0, 0, 0, 0, 0, 1, 2, 3, 0, 0},
+    {0, 0, 0, 3, 2, 1, 0, 0, 0, 0, 1, 2, 3, 0, 0, 0},
+    {0, 0, 0, 0, 3, 2, 1, 1, 1, 1, 2, 3, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 3, 2, 2, 2, 2, 3, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 };
 
 // TODO: the ball should be able to have decimal coordinates
-GameObject ball(1, 5);
+GameObject ball(0, 6);
 // GameObject ball2(1, 2);
 // frame.addObject(ball2);
 
@@ -84,11 +66,11 @@ void setup()
     pinMode(dataPin, OUTPUT);
     pinMode(clockPin, OUTPUT);
 
-    delay(500);
+    // delay(500);
     frame.addObject(ball);
 
-    ball.xVel = 20;
-    ball.yVel = 15;
+    // ball.xVel = -1;
+    // ball.yVel = 15;
 }
 
 void loop()
@@ -119,24 +101,43 @@ void shiftOut16(uint16_t _dataPin, uint16_t _clockPin, uint16_t _bitOrder, uint1
 
 void loadFrame()
 {
-    uint8_t *bitDisplay = frame.displayObjectsToArray();
-
-    for (word i = 0; i < 8; i++)
+    for (int currentRow = 0; currentRow < 16; currentRow++)
     {
-        digitalWrite(latchPin, LOW);
+        uint16_t Val = rows[currentRow]; // Repræsenterer første bitmønster
+        uint16_t redPixels = 0;          // Repræsenterer første bitmønster
+        uint16_t greenPixels = 0;        // Repræsenterer andet bitmønster
+        // Behandl den aktuelle række i arrayet
+        for (int i = 0; i < 16; i++)
+        {
+            switch (array[currentRow][i])
+            {
+            case 1: // 1 i Val2 og 0 i Val3
+                redPixels |= (1 << i);
+                greenPixels |= (0 << i);
+                break;
+            case 2: // 0 i Val2 og 1 i Val3
+                redPixels |= (0 << i);
+                greenPixels |= (1 << i);
+                break;
+            case 3: // 1 i både Val2 og Val3
+                redPixels |= (1 << i);
+                greenPixels |= (1 << i);
+                break;
+            case 0: // Sæt bit i Val
+                redPixels |= (0 << i);
+                greenPixels |= (0 << i);
+                break;
+            default:
+                break;
+            }
+        }
 
-        // gå igennem rækkerne
-        shiftOut(dataPin, clockPin, MSBFIRST, 8 - i);
+        digitalWrite(latchPin, LOW);                          // Forbered latch
+        shiftOut16(dataPin, clockPin, LSBFIRST, Val);         // Send Val
+        shiftOut16(dataPin, clockPin, MSBFIRST, redPixels);   // Send Val2
+        shiftOut16(dataPin, clockPin, MSBFIRST, greenPixels); // Send Val3
+        digitalWrite(latchPin, HIGH);                         // Aktivér latch for at opdatere output
 
-        // tilføj din nuværende kolonne
-        shiftOut(dataPin, clockPin, LSBFIRST, bitDisplay[i]);
-
-        digitalWrite(latchPin, HIGH);
-        // delay(500);
+        // Gå til næste række i arrayet    // delay(500);
     }
-    // reset the bit to clear memory
-    delete[] bitDisplay;
-
-    delay(10);
-    // Serial.print(object.getXCord());
 }
