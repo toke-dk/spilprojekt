@@ -35,6 +35,11 @@ void Frame::addObject(GameObject &object)
   _gameObjects[_amountOfObjects - 1] = &object;
   // Serial.println(_gameObjects[0]->xCord);
 
+  if (object.getType() == GameObject::STATIC)
+  {
+    _amountOfStaticObjects++;
+  }
+
   Serial.print("x:cord");
   Serial.println(_gameObjects[1]->xCord);
   Serial.print("y:cord");
@@ -75,9 +80,22 @@ void Frame::placeObjectsToGrid()
 
 void Frame::_handleBarriers(GameObject *object)
 {
-  //
+  // check for bouncing objects
   if (object->getType() == GameObject::BOUNCING)
   {
+    GameObject **staticObjects = getStaticObjects();
+    if (object->xCord + object->width > staticObjects[0]->xCord &&
+        object->xCord < staticObjects[0]->xCord + staticObjects[0]->width &&
+        object->yCord + object->height > staticObjects[0]->yCord &&
+        object->yCord < staticObjects[0]->yCord + staticObjects[0]->height)
+    {
+      object->yVel *= -1;
+
+      Serial.print("Collision ");
+      Serial.println(staticObjects[0]->height);
+    }
+    delete[] staticObjects;
+
     // Checks if there is collision with right border
     if (object->xCord > _columns - 1)
     {
@@ -158,4 +176,23 @@ void Frame::set(float col, float row, enum Colors color)
 int Frame::get(size_t row, size_t col)
 {
   return grid[row][col];
+}
+
+GameObject **Frame::getStaticObjects()
+{
+  // Dynamically allocate memory based on the number of bouncing objects
+  GameObject **bouncingObjects = new GameObject *[_amountOfObjects];
+
+  int index = 0;
+  for (size_t i = 0; i < _amountOfObjects; i++)
+  {
+    if (_gameObjects[i]->getType() == GameObject::STATIC)
+    {
+      bouncingObjects[index] = _gameObjects[i];
+      index++;
+    }
+  }
+
+  // Optionally resize if needed (not necessary with this approach)
+  return bouncingObjects;
 }

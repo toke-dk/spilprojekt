@@ -36,6 +36,8 @@ public:
 
   void move();
 
+  bool isColliding(GameObject &other);
+
 private:
   float _previousTime = 0; // Store the last frame time
   float _deltaTime = 0;    // Store the time difference between frames

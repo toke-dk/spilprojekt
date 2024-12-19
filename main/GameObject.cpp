@@ -54,3 +54,11 @@ GameObject::ObjectType GameObject::getType()
 {
   return _type;
 };
+
+bool GameObject::isColliding(GameObject &other)
+{
+  return xCord < other.xCord + other.width &&
+         xCord + width > other.xCord &&
+         yCord < other.yCord + other.height &&
+         yCord + height > other.yCord;
+}

@@ -29,12 +29,15 @@ public:
 
   int **grid;
 
+  GameObject **getStaticObjects();
+
   ~Frame(); // Declare the destructor
 
 private:
   size_t _rows, _columns;
   GameObject *_gameObjects[100];
   size_t _amountOfObjects;
+  size_t _amountOfStaticObjects;
 
   size_t _X_SEGMENTS;
   size_t _Y_SEGMENTS;
