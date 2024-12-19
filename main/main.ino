@@ -61,7 +61,7 @@ Frame frame(X_SEGMENTS, Y_SEGMENTS);
 
 void setup()
 {
-    Serial.begin(115200);
+    Serial.begin(9600);
     Serial.println("Start");
     pinMode(latchPin, OUTPUT);
     pinMode(dataPin, OUTPUT);
@@ -80,6 +80,28 @@ void setup()
 
 void loop()
 {
+    if (Serial.available() > 0)
+    {
+        char receivedChar = Serial.read(); // Read one character
+        Serial.print("You pressed: ");
+        Serial.println(receivedChar); // Echo back the character
+        if (receivedChar == 'w')
+        {
+            playerOne.up();
+        }
+        if (receivedChar == 'a')
+        {
+            playerOne.left();
+        }
+        else if (receivedChar == 's')
+        {
+            playerOne.down();
+        }
+        else if (receivedChar == 'd')
+        {
+            playerOne.right();
+        }
+    }
     // ball.right();
     // Serial.println(ball.pos().getX());
     // starter frame

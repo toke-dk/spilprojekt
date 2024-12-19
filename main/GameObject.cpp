@@ -6,12 +6,12 @@ GameObject::GameObject(float xCord, float yCord, GameObject::ObjectType type) : 
 
 void GameObject::up()
 {
-  yCord++;
+  yCord--;
 }
 
 void GameObject::down()
 {
-  yCord--;
+  yCord++;
 }
 
 void GameObject::left()
