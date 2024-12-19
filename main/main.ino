@@ -30,7 +30,7 @@ const word rows[rowCount] = {
     0b0111111111111111,
 };
 
-uint8_t array[16][16] = {
+int array[16][16] = {
     {0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 3, 2, 2, 2, 2, 3, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 3, 2, 1, 1, 1, 1, 2, 3, 0, 0, 0, 0},
@@ -69,8 +69,8 @@ void setup()
     // delay(500);
     frame.addObject(ball);
 
-    // ball.xVel = -1;
-    // ball.yVel = 15;
+    ball.xVel = 30;
+    ball.yVel = 26;
 }
 
 void loop()
@@ -101,6 +101,10 @@ void shiftOut16(uint16_t _dataPin, uint16_t _clockPin, uint16_t _bitOrder, uint1
 
 void loadFrame()
 {
+    int *test[16][16] = {0};
+    array[0][rowCount - 1] = 3;
+    frame.placeObjectsToGrid();
+    // Serial.println(frame.grid[0][6]);
     for (int currentRow = 0; currentRow < 16; currentRow++)
     {
         uint16_t Val = rows[currentRow]; // Repræsenterer første bitmønster
@@ -109,7 +113,7 @@ void loadFrame()
         // Behandl den aktuelle række i arrayet
         for (int i = 0; i < 16; i++)
         {
-            switch (array[currentRow][i])
+            switch (frame.grid[currentRow][i])
             {
             case 1: // 1 i Val2 og 0 i Val3
                 redPixels |= (1 << i);

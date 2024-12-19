@@ -4,6 +4,13 @@
 #include <Arduino.h>
 #include "GameObject.h"
 
+enum Colors
+{
+  RED,
+  GREEN,
+  YELLOW
+};
+
 class Frame
 {
 public:
@@ -11,18 +18,21 @@ public:
 
   void addObject(GameObject &object);
 
-  uint8_t *displayObjectsToArray();
+  void placeObjectsToGrid();
 
-  void set(float row, float col, bool value);
+  void set(float row, float col, enum Colors color);
   int get(size_t row, size_t col);
 
   uint8_t *toCompactArray();
 
   void printGrid();
 
+  int **grid;
+
+  ~Frame(); // Declare the destructor
+
 private:
   size_t _rows, _columns;
-  bool _grid[16][16];
   GameObject *_gameObjects[100];
   size_t _amountOfObjects;
 

@@ -1,8 +1,30 @@
 #include "Frame.h"
 using namespace std;
 
-Frame::Frame(size_t X_SEGMENTS, size_t Y_SEGMENTS) : _rows(Y_SEGMENTS * 8), _columns(X_SEGMENTS * 8), _grid(), _X_SEGMENTS(X_SEGMENTS), _Y_SEGMENTS(Y_SEGMENTS)
+Frame::Frame(size_t X_SEGMENTS, size_t Y_SEGMENTS) : _rows(Y_SEGMENTS * 8), _columns(X_SEGMENTS * 8), _X_SEGMENTS(X_SEGMENTS), _Y_SEGMENTS(Y_SEGMENTS)
 {
+  // Allocate memory for rows
+  grid = new int *[16];
+  for (size_t i = 0; i < 16; ++i)
+  {
+    // Allocate memory for columns in each row
+    grid[i] = new int[16];
+
+    // Initialize all elements to 0
+    for (size_t j = 0; j < 16; ++j)
+    {
+      grid[i][j] = 0;
+    }
+  }
+}
+
+Frame::~Frame()
+{
+  for (size_t i = 0; i < 16; ++i)
+  {
+    delete[] grid[i]; // Free each row
+  }
+  delete[] grid; // Free the row pointers
 }
 
 void Frame::addObject(GameObject &object)
@@ -19,7 +41,7 @@ void Frame::addObject(GameObject &object)
   Serial.println(_gameObjects[1]->yCord);
 }
 
-uint8_t *Frame::displayObjectsToArray()
+void Frame::placeObjectsToGrid()
 {
 
   // reset the old grid to draw a new
@@ -27,7 +49,7 @@ uint8_t *Frame::displayObjectsToArray()
   {
     for (size_t j = 0; j < _columns; j++)
     {
-      _grid[i][j] = 0; // Set each element to 0
+      grid[i][j] = 0; // Set each element to 0
     }
   };
 
@@ -40,31 +62,8 @@ uint8_t *Frame::displayObjectsToArray()
     // correction of moving gameobjects
     _bounceIfEdge(_gameObjects[i]);
 
-    set(_gameObjects[i]->yCord, _gameObjects[i]->xCord, true);
+    set(_gameObjects[i]->xCord, _gameObjects[i]->yCord, RED);
   }
-  return toCompactArray();
-}
-
-// Convert to a compact bit-representation
-uint8_t *Frame::toCompactArray()
-{
-  size_t rows = sizeof(_grid) / sizeof(_grid[0]);       // Total size / size of one row
-  size_t cols = sizeof(_grid[0]) / sizeof(_grid[0][0]); // Size of one row / size of one element
-
-  // Dynamically allocate an array of uint8_t
-  uint8_t *compact = new uint8_t[rows]();
-
-  for (size_t i = 0; i < rows; ++i)
-  {
-    for (size_t j = 0; j < cols; ++j)
-    {
-      if (_grid[i][j])
-      {
-        compact[i] |= (1 << j);
-      }
-    }
-  }
-  return compact; // Caller must free the memory
 }
 
 void Frame::_bounceIfEdge(GameObject *object)
@@ -99,25 +98,30 @@ void Frame::_bounceIfEdge(GameObject *object)
 }
 
 // Set a specific cell
-void Frame::set(float row, float col, bool value)
+void Frame::set(float col, float row, enum Colors color)
 {
-  _grid[round(row)][round(col)] = value;
+  int colortoAdd = 1;
+  switch (color)
+  {
+  case RED:
+    colortoAdd = 1;
+    break;
+  case GREEN:
+    colortoAdd = 2;
+    break;
+  case YELLOW:
+    colortoAdd = 3;
+    break;
+
+  default:
+    break;
+  }
+  // IDK why i should _columns - 1but it works
+  grid[round(row)][(_columns - 1) - round(col)] = colortoAdd;
 }
 
 // Get a specific cell
 int Frame::get(size_t row, size_t col)
 {
-  return _grid[row][col];
-}
-
-void Frame::printGrid()
-{
-  for (const auto &row : _grid)
-  {
-    for (bool cell : row)
-    {
-      Serial.print(cell ? "1" : "0");
-    }
-    Serial.println("f");
-  }
+  return grid[row][col];
 }
