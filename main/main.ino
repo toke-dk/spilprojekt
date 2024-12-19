@@ -71,11 +71,11 @@ void setup()
     frame.addObject(ball);
     frame.addObject(playerOne);
 
-    ball.xVel = 20;
-    ball.yVel = 35;
+    ball.xVel = 16;
+    ball.yVel = 10;
 
-    playerOne.height = 3;
-    playerOne.width = 7;
+    playerOne.height = 5;
+    playerOne.width = 8;
 }
 
 void loop()

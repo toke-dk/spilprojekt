@@ -89,7 +89,22 @@ void Frame::_handleBarriers(GameObject *object)
         object->yCord + object->height > staticObjects[0]->yCord &&
         object->yCord < staticObjects[0]->yCord + staticObjects[0]->height)
     {
-      object->yVel *= -1;
+      float closestXEdge = min(
+          staticObjects[0]->xCord + staticObjects[0]->width - object->xCord - object->width,
+          object->xCord - staticObjects[0]->xCord);
+
+      float closestYEdge = min(
+          staticObjects[0]->yCord + staticObjects[0]->height - object->yCord - object->height,
+          object->yCord - staticObjects[0]->yCord);
+
+      if (min(closestXEdge, closestYEdge) == closestXEdge)
+      {
+        object->xVel *= -1;
+      }
+      else
+      {
+        object->yVel *= -1;
+      }
 
       Serial.print("Collision ");
       Serial.println(staticObjects[0]->height);
