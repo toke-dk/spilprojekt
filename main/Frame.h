@@ -39,6 +39,6 @@ private:
   size_t _X_SEGMENTS;
   size_t _Y_SEGMENTS;
 
-  void _bounceIfEdge(GameObject *object);
+  void _handleBarriers(GameObject *object);
 };
 #endif

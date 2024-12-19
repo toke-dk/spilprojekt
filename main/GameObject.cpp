@@ -1,6 +1,6 @@
 #include "GameObject.h"
 
-GameObject::GameObject(float xCord, float yCord) : xCord(xCord), yCord(yCord)
+GameObject::GameObject(float xCord, float yCord, GameObject::ObjectType type) : xCord(xCord), yCord(yCord), _type(type)
 {
 }
 
@@ -49,3 +49,8 @@ void GameObject::move()
   // Serial.println(yCord);
   // TODO the time and maybe x and y coordinates need more digits (long)
 }
+
+GameObject::ObjectType GameObject::getType()
+{
+  return _type;
+};

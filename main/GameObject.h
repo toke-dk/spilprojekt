@@ -6,7 +6,15 @@
 class GameObject
 {
 public:
-  GameObject(float xCord, float yCord);
+  enum ObjectType
+  {
+    STATIC,
+    BOUNCING
+  };
+
+  GameObject(float xCord, float yCord, enum GameObject::ObjectType type);
+
+  GameObject::ObjectType getType();
 
   float xVel;
   float yVel;
@@ -34,5 +42,6 @@ private:
   float _currentTime = 0;  // Store the current time
   void _moveY();
   void _moveX();
+  GameObject::ObjectType _type;
 };
 #endif

@@ -50,8 +50,8 @@ int array[16][16] = {
 };
 
 // TODO: the ball should be able to have decimal coordinates
-GameObject ball(0, 6);
-GameObject playerOne(5, 5);
+GameObject ball(0, 6, GameObject::BOUNCING);
+GameObject playerOne(5, 5, GameObject::STATIC);
 // GameObject ball2(1, 2);
 // frame.addObject(ball2);
 

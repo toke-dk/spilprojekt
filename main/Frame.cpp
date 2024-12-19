@@ -60,7 +60,7 @@ void Frame::placeObjectsToGrid()
     _gameObjects[i]->move();
 
     // correction of moving gameobjects
-    _bounceIfEdge(_gameObjects[i]);
+    _handleBarriers(_gameObjects[i]);
 
     // if the object has a width
     for (size_t h = 0; h < _gameObjects[i]->height; h++)
@@ -73,34 +73,61 @@ void Frame::placeObjectsToGrid()
   }
 }
 
-void Frame::_bounceIfEdge(GameObject *object)
+void Frame::_handleBarriers(GameObject *object)
 {
-  // Checks if there is collision with right border
-  if (object->xCord > _columns - 1)
+  //
+  if (object->getType() == GameObject::BOUNCING)
   {
-    float correctionAmountX = 2 * (_columns - 1) - object->xCord;
-    object->xCord = correctionAmountX;
-    object->xVel *= -1;
-  }
-  // Check if behind left border
-  if (object->xCord < 0)
-  {
-    object->xCord = -object->xCord;
-    object->xVel *= -1;
-  }
+    // Checks if there is collision with right border
+    if (object->xCord > _columns - 1)
+    {
+      float correctionAmountX = 2 * (_columns - 1) - object->xCord;
+      object->xCord = correctionAmountX;
+      object->xVel *= -1;
+    }
+    // Check if behind left border
+    if (object->xCord < 0)
+    {
+      object->xCord = -object->xCord;
+      object->xVel *= -1;
+    }
 
-  // Checks if there is collision with top borders
-  if (object->yCord > _rows - 1)
-  {
-    float correctionAmountY = 2 * (_rows - 1) - object->yCord;
-    object->yCord = correctionAmountY;
-    object->yVel *= -1;
+    // Checks if there is collision with top borders
+    if (object->yCord > _rows - 1)
+    {
+      float correctionAmountY = 2 * (_rows - 1) - object->yCord;
+      object->yCord = correctionAmountY;
+      object->yVel *= -1;
+    }
+    // Check if below bottom border
+    if (object->yCord < 0)
+    {
+      object->yCord = -object->yCord;
+      object->yVel *= -1;
+    }
   }
-  // Check if below bottom border
-  if (object->yCord < 0)
+  else if (object->getType() == GameObject::STATIC)
   {
-    object->yCord = -object->yCord;
-    object->yVel *= -1;
+    // Checks if there is collision with right border
+    if (object->xCord > _columns - 1)
+    {
+      object->xCord = _columns - 1;
+    }
+    // Check if behind left border
+    if (object->xCord < 0)
+    {
+      object->xCord = 0;
+    }
+    // Checks if there is collision with top borders
+    if (object->yCord > _rows - 1)
+    {
+      object->yCord = _rows - 1;
+    }
+    // Check if below bottom border
+    if (object->yCord < 0)
+    {
+      object->yCord = 0;
+    }
   }
 }
 
