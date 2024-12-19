@@ -51,6 +51,7 @@ int array[16][16] = {
 
 // TODO: the ball should be able to have decimal coordinates
 GameObject ball(0, 6);
+GameObject playerOne(5, 5);
 // GameObject ball2(1, 2);
 // frame.addObject(ball2);
 
@@ -68,9 +69,13 @@ void setup()
 
     // delay(500);
     frame.addObject(ball);
+    frame.addObject(playerOne);
 
     ball.xVel = 30;
     ball.yVel = 26;
+
+    playerOne.height = 3;
+    playerOne.width = 7;
 }
 
 void loop()
@@ -101,8 +106,6 @@ void shiftOut16(uint16_t _dataPin, uint16_t _clockPin, uint16_t _bitOrder, uint1
 
 void loadFrame()
 {
-    int *test[16][16] = {0};
-    array[0][rowCount - 1] = 3;
     frame.placeObjectsToGrid();
     // Serial.println(frame.grid[0][6]);
     for (int currentRow = 0; currentRow < 16; currentRow++)

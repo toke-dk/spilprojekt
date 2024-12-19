@@ -62,7 +62,14 @@ void Frame::placeObjectsToGrid()
     // correction of moving gameobjects
     _bounceIfEdge(_gameObjects[i]);
 
-    set(_gameObjects[i]->xCord, _gameObjects[i]->yCord, RED);
+    // if the object has a width
+    for (size_t h = 0; h < _gameObjects[i]->height; h++)
+    {
+      for (size_t w = 0; w < _gameObjects[i]->width; w++)
+      {
+        set(_gameObjects[i]->xCord + w, _gameObjects[i]->yCord + h, RED);
+      }
+    }
   }
 }
 
