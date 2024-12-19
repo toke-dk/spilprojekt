@@ -146,9 +146,9 @@ void Frame::_handleBarriers(GameObject *object)
   else if (object->getType() == GameObject::STATIC)
   {
     // Checks if there is collision with right border
-    if (object->xCord > _columns - 1)
+    if (object->xCord + object->width > _columns)
     {
-      object->xCord = _columns - 1;
+      object->xCord = _columns - object->width;
     }
     // Check if behind left border
     if (object->xCord < 0)
@@ -156,9 +156,9 @@ void Frame::_handleBarriers(GameObject *object)
       object->xCord = 0;
     }
     // Checks if there is collision with top borders
-    if (object->yCord > _rows - 1)
+    if (object->yCord + object->height > _rows)
     {
-      object->yCord = _rows - 1;
+      object->yCord = _rows - object->height;
     }
     // Check if below bottom border
     if (object->yCord < 0)
