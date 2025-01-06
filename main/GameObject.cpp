@@ -1,6 +1,6 @@
 #include "GameObject.h"
 
-GameObject::GameObject(float xCord, float yCord, GameObject::ObjectType type) : xCord(xCord), yCord(yCord), _type(type)
+GameObject::GameObject(float xCord, float yCord, GameObject::ObjectType type, GameObject::Colors color) : xCord(xCord), yCord(yCord), _type(type), color(color)
 {
 }
 

@@ -4,13 +4,6 @@
 #include <Arduino.h>
 #include "GameObject.h"
 
-enum Colors
-{
-  RED,
-  GREEN,
-  YELLOW
-};
-
 class Frame
 {
 public:
@@ -20,7 +13,7 @@ public:
 
   void placeObjectsToGrid();
 
-  void set(float row, float col, enum Colors color);
+  void set(float row, float col, GameObject::Colors color);
   int get(size_t row, size_t col);
 
   uint8_t *toCompactArray();

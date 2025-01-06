@@ -11,10 +11,18 @@ public:
     STATIC,
     BOUNCING
   };
+  enum Colors
+  {
+    RED,
+    GREEN,
+    YELLOW
+  };
 
-  GameObject(float xCord, float yCord, enum GameObject::ObjectType type);
+  GameObject(float xCord, float yCord, enum GameObject::ObjectType type, GameObject::Colors color);
 
   GameObject::ObjectType getType();
+
+  GameObject::Colors color;
 
   float xVel;
   float yVel;

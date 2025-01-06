@@ -55,9 +55,9 @@ int array[16][16] = {
 };
 
 // TODO: the ball should be able to have decimal coordinates
-GameObject ball(0, 0, GameObject::BOUNCING);
-GameObject playerLeft(0, rowCount - PLAYER_HEIGHT, GameObject::STATIC);
-GameObject playerRight(collumnCount - 1, rowCount - PLAYER_HEIGHT, GameObject::STATIC);
+GameObject ball(0, 0, GameObject::BOUNCING, GameObject::RED);
+GameObject playerLeft(0, rowCount - PLAYER_HEIGHT, GameObject::STATIC, GameObject::GREEN);
+GameObject playerRight(collumnCount - 1, rowCount - PLAYER_HEIGHT, GameObject::STATIC, GameObject::GREEN);
 
 // GameObject ball2(1, 2);
 // frame.addObject(ball2);

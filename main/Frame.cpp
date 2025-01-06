@@ -72,7 +72,7 @@ void Frame::placeObjectsToGrid()
     {
       for (size_t w = 0; w < _gameObjects[i]->width; w++)
       {
-        set(_gameObjects[i]->xCord + w, _gameObjects[i]->yCord + h, YELLOW);
+        set(_gameObjects[i]->xCord + w, _gameObjects[i]->yCord + h, _gameObjects[i]->color);
       }
     }
   }
@@ -169,18 +169,18 @@ void Frame::_handleBarriers(GameObject *object)
 }
 
 // Set a specific cell
-void Frame::set(float col, float row, enum Colors color)
+void Frame::set(float col, float row, GameObject::Colors color)
 {
   int colortoAdd = 1;
   switch (color)
   {
-  case RED:
+  case GameObject::RED:
     colortoAdd = 1;
     break;
-  case GREEN:
+  case GameObject::GREEN:
     colortoAdd = 2;
     break;
-  case YELLOW:
+  case GameObject::YELLOW:
     colortoAdd = 3;
     break;
 
