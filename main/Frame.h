@@ -35,6 +35,6 @@ private:
   size_t _X_SEGMENTS;
   size_t _Y_SEGMENTS;
 
-  void _handleBarriers(GameObject *object);
+  void _handleBarriers(GameObject *object, int index);
 };
 #endif

@@ -65,7 +65,7 @@ void Frame::placeObjectsToGrid()
     _gameObjects[i]->move();
 
     // correction of moving gameobjects
-    _handleBarriers(_gameObjects[i]);
+    _handleBarriers(_gameObjects[i], i);
 
     // if the object has a width
     for (size_t h = 0; h < _gameObjects[i]->height; h++)
@@ -78,7 +78,7 @@ void Frame::placeObjectsToGrid()
   }
 }
 
-void Frame::_handleBarriers(GameObject *object)
+void Frame::_handleBarriers(GameObject *object, int index)
 {
   // check for bouncing objects
   if (object->getType() == GameObject::BOUNCING)
@@ -115,18 +115,12 @@ void Frame::_handleBarriers(GameObject *object)
 
     delete[] staticObjects;
 
-    // Checks if there is collision with right border
-    if (object->xCord > _columns - 1)
+    // Checks if there is collision with right or left border
+    if (object->xCord > _columns - 1 || object->xCord < 0)
     {
-      float correctionAmountX = 2 * (_columns - 1) - object->xCord;
-      object->xCord = correctionAmountX;
-      object->xVel *= -1;
-    }
-    // Check if behind left border
-    if (object->xCord < 0)
-    {
-      object->xCord = -object->xCord;
-      object->xVel *= -1;
+      /// resets the ball
+      object->xCord = 7;
+      object->yCord = 7;
     }
 
     // Checks if there is collision with top borders
@@ -214,4 +208,13 @@ GameObject **Frame::getStaticObjects()
 
   // Optionally resize if needed (not necessary with this approach)
   return bouncingObjects;
+}
+
+void removeElement(int arr[], int &size, int index)
+{
+  for (int i = index; i < size - 1; ++i)
+  {
+    arr[i] = arr[i + 1];
+  }
+  --size; // Reduce the size
 }

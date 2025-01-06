@@ -83,7 +83,7 @@ void setup()
     frame.addObject(playerLeft);
     frame.addObject(playerRight);
 
-    ball.xVel = 10;
+    ball.xVel = 8;
     ball.yVel = 8;
 
     playerLeft.height = 5;
