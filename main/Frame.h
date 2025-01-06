@@ -11,6 +11,8 @@ public:
 
   void addObject(GameObject &object);
 
+  void resetObjectPosition(GameObject *object);
+
   void placeObjectsToGrid();
 
   void set(float row, float col, GameObject::Colors color);
@@ -34,6 +36,9 @@ private:
 
   size_t _X_SEGMENTS;
   size_t _Y_SEGMENTS;
+
+  size_t _p1Score = 0;
+  size_t _p2Score = 0;
 
   void _handleBarriers(GameObject *object, int index);
 };

@@ -115,12 +115,17 @@ void Frame::_handleBarriers(GameObject *object, int index)
 
     delete[] staticObjects;
 
-    // Checks if there is collision with right or left border
-    if (object->xCord > _columns - 1 || object->xCord < 0)
+    // Checks if there is collision with right border
+    if (object->xCord > _columns - 1)
     {
       /// resets the ball
-      object->xCord = 7;
-      object->yCord = 7;
+      resetObjectPosition(object);
+      _p1Score += 1;
+    }
+    if (object->xCord < 0)
+    {
+      resetObjectPosition(object);
+      _p2Score += 1;
     }
 
     // Checks if there is collision with top borders
@@ -160,6 +165,12 @@ void Frame::_handleBarriers(GameObject *object, int index)
       object->yCord = 0;
     }
   }
+}
+
+void Frame::resetObjectPosition(GameObject *object)
+{
+  object->xCord = 7;
+  object->yCord = 7;
 }
 
 // Set a specific cell
