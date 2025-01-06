@@ -72,7 +72,7 @@ void Frame::placeObjectsToGrid()
     {
       for (size_t w = 0; w < _gameObjects[i]->width; w++)
       {
-        set(_gameObjects[i]->xCord + w, _gameObjects[i]->yCord + h, RED);
+        set(_gameObjects[i]->xCord + w, _gameObjects[i]->yCord + h, YELLOW);
       }
     }
   }
@@ -109,7 +109,7 @@ void Frame::_handleBarriers(GameObject *object)
           object->yVel *= -1;
         }
 
-        Serial.print("Collision ");
+        // Serial.print("Collision ");
       }
     }
 

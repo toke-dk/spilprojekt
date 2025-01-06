@@ -11,6 +11,10 @@
 
 const int rowCount = 16;
 const int collumnCount = 16;
+const int p1Up = 7;
+const int p1Down = 6;
+const int p2Up = 8;
+const int p2Down = 9;
 
 const word rows[rowCount] = {
     0b1111111111111110,
@@ -69,14 +73,18 @@ void setup()
     pinMode(latchPin, OUTPUT);
     pinMode(dataPin, OUTPUT);
     pinMode(clockPin, OUTPUT);
+    pinMode(p1Up, INPUT);
+    pinMode(p1Down, INPUT);
+    pinMode(p2Up, INPUT);
+    pinMode(p2Down, INPUT);
 
     // delay(500);
     frame.addObject(ball);
     frame.addObject(playerLeft);
     frame.addObject(playerRight);
 
-    ball.xVel = 16;
-    ball.yVel = 10;
+    ball.xVel = 10;
+    ball.yVel = 8;
 
     playerLeft.height = 5;
     playerRight.height = 5;
@@ -84,12 +92,28 @@ void setup()
 
 void loop()
 {
+    if (digitalRead(p1Up) == HIGH)
+    {
+        playerLeft.up();
+    }
+    if (digitalRead(p1Down) == HIGH)
+    {
+        playerLeft.down();
+    }
+    if (digitalRead(p2Up) == HIGH)
+    {
+        playerRight.up();
+    }
+    if (digitalRead(p2Down) == HIGH)
+    {
+        playerRight.down();
+    }
     if (Serial.available() > 0)
     {
         char receivedChar = Serial.read(); // Read one character
         Serial.print("You pressed: ");
         Serial.println(receivedChar); // Echo back the character
-        if (receivedChar == 'w')
+        if (receivedChar == 'w' || digitalRead(p1Up) == HIGH)
         {
             playerLeft.up();
         }
