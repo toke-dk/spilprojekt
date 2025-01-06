@@ -120,12 +120,12 @@ void Frame::_handleBarriers(GameObject *object, int index)
     {
       /// resets the ball
       resetObjectPosition(object);
-      _p1Score += 1;
+      p1Score += 1;
     }
     if (object->xCord < 0)
     {
       resetObjectPosition(object);
-      _p2Score += 1;
+      p2Score += 1;
     }
 
     // Checks if there is collision with top borders

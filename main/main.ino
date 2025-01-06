@@ -136,6 +136,8 @@ void loop()
 
     loadFrame();
     // delay(2);
+
+    Serial.println(frame.p1Score);
 }
 
 void shiftOut16(uint16_t _dataPin, uint16_t _clockPin, uint16_t _bitOrder, uint16_t _val)

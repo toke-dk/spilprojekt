@@ -28,6 +28,9 @@ public:
 
   ~Frame(); // Declare the destructor
 
+  size_t p1Score = 0;
+  size_t p2Score = 0;
+
 private:
   size_t _rows, _columns;
   GameObject *_gameObjects[100];
@@ -36,9 +39,6 @@ private:
 
   size_t _X_SEGMENTS;
   size_t _Y_SEGMENTS;
-
-  size_t _p1Score = 0;
-  size_t _p2Score = 0;
 
   void _handleBarriers(GameObject *object, int index);
 };
