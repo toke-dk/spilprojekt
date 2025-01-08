@@ -4,10 +4,18 @@
 #define latchPin 10
 #define dataPin 11
 #define clockPin 13
+
+#define latchPinScore 9
+#define dataPinScore 8
+#define clockPinScore 7
+
 #define X_SEGMENTS 2
 #define Y_SEGMENTS 2
 #define PLAYER_HEIGHT 5
 #define SEGMENTS_TOTAL (X_SEGMENTS * Y_SEGMENTS)
+
+int p1ScoreBitsPins[4] = {11, 12, 13, 14};
+int p2ScoreBitsPins[4] = {15, 16, 17, 18};
 
 const int rowCount = 16;
 const int collumnCount = 16;
@@ -70,13 +78,29 @@ void setup()
 {
     Serial.begin(9600);
     Serial.println("Start");
+    Serial.println(toBinaryString(10));
+
+    // Frame pins
     pinMode(latchPin, OUTPUT);
     pinMode(dataPin, OUTPUT);
     pinMode(clockPin, OUTPUT);
+
+    // Score pins
+    pinMode(latchPinScore, OUTPUT);
+    pinMode(dataPinScore, OUTPUT);
+    pinMode(clockPinScore, OUTPUT);
+
     pinMode(p1Up, INPUT);
     pinMode(p1Down, INPUT);
     pinMode(p2Up, INPUT);
     pinMode(p2Down, INPUT);
+
+    // Initialize bits pins
+    for (int i = 0; i < 4; i++)
+    {
+        pinMode(p1ScoreBitsPins[i], OUTPUT);
+        pinMode(p2ScoreBitsPins[i], OUTPUT);
+    }
 
     // delay(500);
     frame.addObject(ball);
@@ -134,10 +158,13 @@ void loop()
     // Serial.println(ball.pos().getX());
     // starter frame
 
+    // Load all objects from the frame
     loadFrame();
-    // delay(2);
 
-    Serial.println(frame.p1Score);
+    // Load both player scores
+    // loadScore();
+
+    // delay(2);
 }
 
 void shiftOut16(uint16_t _dataPin, uint16_t _clockPin, uint16_t _bitOrder, uint16_t _val)
@@ -199,4 +226,25 @@ void loadFrame()
 
         // Gå til næste række i arrayet    // delay(500);
     }
+}
+
+void loadScore()
+{
+    digitalWrite(latchPinScore, LOW);
+    shiftOut(dataPinScore, latchPinScore, MSBFIRST, 0b00000001);
+    shiftOut(dataPinScore, latchPinScore, MSBFIRST, 0b00000001);
+    digitalWrite(latchPinScore, HIGH);
+}
+
+String toBinaryString(int i)
+{
+    // Convert int to binary string
+    String binary = String(i, BIN);
+
+    // Pad with zeros to 8 bits
+    while (binary.length() < 8)
+    {
+        binary = "0" + binary;
+    }
+    return "0b" + binary;
 }
