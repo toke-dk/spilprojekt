@@ -115,17 +115,26 @@ void Frame::_handleBarriers(GameObject *object, int index)
 
     delete[] staticObjects;
 
-    // Checks if there is collision with right border
+    // Checks if there is collision with right border then update score
     if (object->xCord > _columns - 1)
     {
       /// resets the ball
       resetObjectPosition(object);
       p1Score += 1;
     }
+
+    // Checks if there is collision with left border then update score
     if (object->xCord < 0)
     {
       resetObjectPosition(object);
       p2Score += 1;
+    }
+
+    // If someone reaches score 10 reset score
+    if (p1Score >= 10 || p2Score >= 10)
+    {
+      p1Score = 0;
+      p2Score = 0;
     }
 
     // Checks if there is collision with top borders
