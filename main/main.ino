@@ -1,13 +1,13 @@
 #include "GameObject.h"
 #include "Frame.h"
 
-#define latchPin 10
-#define dataPin 11
-#define clockPin 13
+#define latchPin 10 // Gul
+#define dataPin 11  // Grøn
+#define clockPin 13 // Lyserød
 
-#define latchPinScore 9
-#define dataPinScore 8
-#define clockPinScore 7
+#define latchPinScore 9 // Gul
+#define dataPinScore 8  // Grøn
+#define clockPinScore 7 // Lyserød
 
 #define X_SEGMENTS 2
 #define Y_SEGMENTS 2
@@ -78,7 +78,6 @@ void setup()
 {
     Serial.begin(9600);
     Serial.println("Start");
-    Serial.println(toBinaryString(10));
 
     // Frame pins
     pinMode(latchPin, OUTPUT);
@@ -230,21 +229,8 @@ void loadFrame()
 
 void loadScore()
 {
+    Serial.println("Load score");
     digitalWrite(latchPinScore, LOW);
-    shiftOut(dataPinScore, latchPinScore, MSBFIRST, 0b00000001);
-    shiftOut(dataPinScore, latchPinScore, MSBFIRST, 0b00000001);
+    shiftOut(dataPinScore, clockPinScore, MSBFIRST, 0b00100100);
     digitalWrite(latchPinScore, HIGH);
-}
-
-String toBinaryString(int i)
-{
-    // Convert int to binary string
-    String binary = String(i, BIN);
-
-    // Pad with zeros to 8 bits
-    while (binary.length() < 8)
-    {
-        binary = "0" + binary;
-    }
-    return "0b" + binary;
 }
