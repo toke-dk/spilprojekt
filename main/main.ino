@@ -14,9 +14,6 @@
 #define PLAYER_HEIGHT 5
 #define SEGMENTS_TOTAL (X_SEGMENTS * Y_SEGMENTS)
 
-int p1ScoreBitsPins[4] = {11, 12, 13, 14};
-int p2ScoreBitsPins[4] = {15, 16, 17, 18};
-
 const int rowCount = 16;
 const int collumnCount = 16;
 const int p1Up = 7;
@@ -93,13 +90,6 @@ void setup()
     pinMode(p1Down, INPUT);
     pinMode(p2Up, INPUT);
     pinMode(p2Down, INPUT);
-
-    // Initialize bits pins
-    for (int i = 0; i < 4; i++)
-    {
-        pinMode(p1ScoreBitsPins[i], OUTPUT);
-        pinMode(p2ScoreBitsPins[i], OUTPUT);
-    }
 
     // delay(500);
     frame.addObject(ball);
