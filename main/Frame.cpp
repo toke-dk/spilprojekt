@@ -102,7 +102,9 @@ void Frame::_handleBarriers(GameObject *object, int index)
 
         if (min(closestXEdge, closestYEdge) == closestXEdge)
         {
-          object->xVel *= -1;
+          object->xVel *= -random(100, 105) / 100.0;
+          object->yVel *= random(100, 102) / 100.0;
+          Serial.println(object->xVel);
         }
         else
         {
@@ -120,6 +122,9 @@ void Frame::_handleBarriers(GameObject *object, int index)
     {
       /// resets the ball
       resetObjectPosition(object);
+      object->xVel = 8;
+      object->yVel = 8;
+
       p1Score += 1;
     }
 
@@ -128,6 +133,9 @@ void Frame::_handleBarriers(GameObject *object, int index)
     {
       resetObjectPosition(object);
       p2Score += 1;
+
+      object->xVel = 8;
+      object->yVel = 8;
     }
 
     // If someone reaches score 10 reset score
