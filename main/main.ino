@@ -14,6 +14,9 @@
 #define PLAYER_HEIGHT 5
 #define SEGMENTS_TOTAL (X_SEGMENTS * Y_SEGMENTS)
 
+int p1ScoreBitsPins[4] = {11, 12, 13, 14};
+int p2ScoreBitsPins[4] = {15, 16, 17, 18};
+
 const int rowCount = 16;
 const int collumnCount = 16;
 const int p1Up = 7;
@@ -71,6 +74,9 @@ GameObject playerRight(collumnCount - 1, rowCount - PLAYER_HEIGHT, GameObject::S
 // ball2.yVel = 8;
 Frame frame(X_SEGMENTS, Y_SEGMENTS);
 
+int p1OldScore = 0;
+int p2OldScore = 0;
+
 void setup()
 {
     Serial.begin(9600);
@@ -90,6 +96,13 @@ void setup()
     pinMode(p1Down, INPUT);
     pinMode(p2Up, INPUT);
     pinMode(p2Down, INPUT);
+
+    // Initialize bits pins
+    for (int i = 0; i < 4; i++)
+    {
+        pinMode(p1ScoreBitsPins[i], OUTPUT);
+        pinMode(p2ScoreBitsPins[i], OUTPUT);
+    }
 
     // delay(500);
     frame.addObject(ball);
@@ -216,12 +229,19 @@ void loadFrame()
 
         // Gå til næste række i arrayet    // delay(500);
     }
+    if (p1OldScore != frame.p1Score || p2OldScore != frame.p2Score)
+    {
+        loadScore();
+    }
 }
 
 void loadScore()
 {
     Serial.println("Load score");
     digitalWrite(latchPinScore, LOW);
-    shiftOut(dataPinScore, clockPinScore, MSBFIRST, 0b00100100);
+    shiftOut(dataPinScore, clockPinScore, MSBFIRST, (frame.p2Score << 4) | frame.p1Score);
     digitalWrite(latchPinScore, HIGH);
+
+    p1OldScore = frame.p1Score;
+    p2OldScore = frame.p2Score;
 }
