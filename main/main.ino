@@ -5,9 +5,9 @@
 #define dataPin 11  // Grøn
 #define clockPin 13 // Lyserød
 
-#define latchPinScore 9 // Gul
-#define dataPinScore 8  // Grøn
-#define clockPinScore 7 // Lyserød
+#define latchPinScore 5 // Gul
+#define dataPinScore 4  // Grøn
+#define clockPinScore 3 // Lyserød
 
 #define X_SEGMENTS 2
 #define Y_SEGMENTS 2
@@ -111,6 +111,7 @@ void setup()
 
     playerLeft.height = 5;
     playerRight.height = 5;
+    loadScore();
 }
 
 void loop()
