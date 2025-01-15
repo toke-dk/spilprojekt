@@ -136,7 +136,10 @@ void loop()
     loadFrame();
 
     // Load both player scores
-    // loadScore();
+    if (p1OldScore != frame.p1Score || p2OldScore != frame.p2Score)
+    {
+        loadScore();
+    }
 
     // delay(2);
 }
@@ -199,10 +202,6 @@ void loadFrame()
         digitalWrite(latchPin, HIGH);                         // Aktivér latch for at opdatere output
 
         // Gå til næste række i arrayet    // delay(500);
-    }
-    if (p1OldScore != frame.p1Score || p2OldScore != frame.p2Score)
-    {
-        loadScore();
     }
 }
 
