@@ -166,27 +166,27 @@ void loadFrame()
     // Serial.println(frame.grid[0][6]);
     for (int currentRow = 0; currentRow < 16; currentRow++)
     {
-        uint16_t Val = rows[currentRow]; // Repræsenterer første bitmønster
-        uint16_t redPixels = 0;          // De røde pixels på rækken
-        uint16_t greenPixels = 0;        // De grønne pixels på rækken
+        uint16_t bitRow = rows[currentRow]; // Repræsenterer første bitmønster
+        uint16_t redPixels = 0;             // De røde pixels på rækken
+        uint16_t greenPixels = 0;           // De grønne pixels på rækken
         // Behandl den aktuelle række i arrayet
         for (int i = 0; i < 16; i++)
         {
             switch (frame.grid[currentRow][i])
             {
-            case 1: // 1 i Val2 og 0 i Val3
+            case 1: // Skal den være rød
                 redPixels |= (1 << i);
                 greenPixels |= (0 << i);
                 break;
-            case 2: // 0 i Val2 og 1 i Val3
+            case 2: // Skal den være grøn
                 redPixels |= (0 << i);
                 greenPixels |= (1 << i);
                 break;
-            case 3: // 1 i både Val2 og Val3
+            case 3: // Skal den være orange
                 redPixels |= (1 << i);
                 greenPixels |= (1 << i);
                 break;
-            case 0: // Sæt bit i Val
+            case 0: // Skal den ikke lyse
                 redPixels |= (0 << i);
                 greenPixels |= (0 << i);
                 break;
@@ -196,7 +196,7 @@ void loadFrame()
         }
 
         digitalWrite(latchPin, LOW);                          // Forbered latch
-        shiftOut16(dataPin, clockPin, LSBFIRST, Val);         // Send Val
+        shiftOut16(dataPin, clockPin, LSBFIRST, bitRow);      // Send the currently indexed row
         shiftOut16(dataPin, clockPin, MSBFIRST, redPixels);   // Send Val2
         shiftOut16(dataPin, clockPin, MSBFIRST, greenPixels); // Send Val3
         digitalWrite(latchPin, HIGH);                         // Aktivér latch for at opdatere output
