@@ -167,8 +167,8 @@ void loadFrame()
     for (int currentRow = 0; currentRow < 16; currentRow++)
     {
         uint16_t Val = rows[currentRow]; // Repræsenterer første bitmønster
-        uint16_t redPixels = 0;          // Repræsenterer første bitmønster
-        uint16_t greenPixels = 0;        // Repræsenterer andet bitmønster
+        uint16_t redPixels = 0;          // De røde pixels på rækken
+        uint16_t greenPixels = 0;        // De grønne pixels på rækken
         // Behandl den aktuelle række i arrayet
         for (int i = 0; i < 16; i++)
         {
